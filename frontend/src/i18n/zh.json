@@ -52,7 +52,18 @@
     "customTitle": "自建 Agent",
     "customCategory": "自定义",
     "customDescription": "从零开始定义身份、性格、权限和工具，完全按你的需求打造。",
-    "customStart": "开始"
+    "customStart": "开始",
+    "empty": "还没有内容。",
+    "emptySearch": "没有匹配的内容。",
+    "externalAgentHint": "这些助手由外面提供。",
+    "searchLabel": "搜索",
+    "searchPlaceholder": "搜索助手…",
+    "tabMarketing": "营销",
+    "tabOffice": "办公",
+    "tabPopular": "热门",
+    "tabSWE": "研发",
+    "tabTrading": "交易",
+    "tabsAria": "人才市场分类"
   },
   "plaza": {
     "title": "智能体广场",
@@ -143,7 +154,15 @@
     "refresh": "刷新二维码",
     "loginWithSSO": "使用企业 SSO 登录",
     "ssoNotice": "此域名已启用企业单点登录 (SSO)。",
-    "standardLogin": "标准登录"
+    "standardLogin": "标准登录",
+    "checkingInvitation": "正在核对邀请码…",
+    "createOrJoinOrganization": "创建或加入组织",
+    "emailAlreadyRegistered": "这个邮箱已经注册过了。",
+    "multiTenantPrompt": "你在多个组织里。选择一个继续。",
+    "selectOrganization": "选择组织",
+    "ssoLoadFailed": "登录方式没有打开。",
+    "ssoLoading": "正在读取登录方式…",
+    "ssoNoProviders": "这个服务没有开启单点登录。"
   },
   "roles": {
     "platformAdmin": "超级管理员",
@@ -286,7 +305,8 @@
       "peer": "同事",
       "assistant": "助理",
       "direct_leader": "直属领导",
-      "other": "其他"
+      "other": "其他",
+      "descriptionPlaceholder": "这个助手是做什么的"
     },
     "directory": {
       "title": "通讯录",
@@ -436,7 +456,10 @@
       "openInNewTab": "在新标签页打开",
       "focusPreview": "聚焦预览",
       "unfocusPreview": "退出聚焦",
-      "versionHistory": "历史版本"
+      "versionHistory": "历史版本",
+      "confirmDelete": "删除这个文件？",
+      "deleteFailed": "文件没有删掉。",
+      "loadFailed": "文件没有打开。"
     },
     "chat": {
       "sessionListTitle": "会话列表",
@@ -483,7 +506,41 @@
       "provider": "来源",
       "toolName": "工具名",
       "inProgress": "进行中",
-      "done": "完成"
+      "done": "完成",
+      "goModelSettings": "去模型设置",
+      "keepSourceFile": "保留源文件",
+      "keepSourceFileConfirm": "保留源文件",
+      "keepSourceFileMessage": "这条消息带着源文件。保留源文件会让助手看到完整的文件。",
+      "noModelAdmin": "还没有接入模型",
+      "noModelMember": "还没有可用模型",
+      "noModelPlaceholder": "先接入一个模型，助手才能回答。",
+      "noModelTitle": "还没有模型",
+      "reconcileApplied": "已应用",
+      "reconcileAppliedConfirm": "应用这次修改",
+      "reconcileAppliedMessage": "助手的修改已经写进文件。",
+      "reconcileFailed": "修改没有写进去",
+      "reconcileNotApplied": "未应用",
+      "reconcileNotAppliedConfirm": "放弃这次修改",
+      "reconcileNotAppliedMessage": "助手的修改被丢弃了，文件还是原来的样子。",
+      "reconcileTitle": "助手改了什么",
+      "reconcileUnknown": "状态未知",
+      "useAgentResult": "用助手的版本",
+      "useAgentResultConfirm": "用助手的版本",
+      "useAgentResultForRun": "这一轮用助手的版本",
+      "useAgentResultMessage": "文件换成助手的版本。",
+      "waitingReplyPending": "等对方回答",
+      "workspaceChecking": "正在核对文件…",
+      "workspaceConflictBody": "你和助手都改了同一个文件。",
+      "workspaceConflictCount": "{{count}} 个文件有冲突",
+      "workspaceConflictPending": "有冲突待处理",
+      "workspaceConflictTitle": "文件冲突",
+      "workspaceNotSaved": "没有保存",
+      "workspacePartial": "部分已保存",
+      "workspacePartialCount": "{{count}} 个文件已保存",
+      "workspaceSaved": "已保存",
+      "workspaceSavedCount": "{{count}} 个文件已保存",
+      "workspaceUnavailable": "工作区不可用",
+      "workspaceVerifying": "正在核对"
     },
     "activityLog": {
       "title": "工作日志",
@@ -558,7 +615,10 @@
         "websocketConnected": "已通过 WebSocket 连接（无需回调 URL）",
         "websocketDisconnected": "已配置为 WebSocket，但当前未连接",
         "websocketDisconnectedHint": "重新保存一次企业微信 WebSocket 配置即可重新连接。",
-        "saveChannel": "保存配置"
+        "saveChannel": "保存配置",
+        "mode": "接入方式",
+        "modeWebhook": "回调",
+        "modeWs": "长连接"
       },
       "danger": {
         "title": "危险操作",
@@ -585,7 +645,28 @@
         "current": "数字员工时区",
         "override": "此数字员工的自定义时区",
         "inherited": "使用公司默认时区",
-        "default": "↩ 公司默认"
+        "default": "↩ 公司默认",
+        "label": "时区",
+        "zones": {
+          "America/Chicago": "America/Chicago（中部时间，UTC-6/-5）",
+          "America/Denver": "America/Denver（山地时间，UTC-7/-6）",
+          "America/Los_Angeles": "America/Los_Angeles（太平洋时间，UTC-8/-7）",
+          "America/New_York": "America/New_York（东部时间，UTC-5/-4）",
+          "America/Sao_Paulo": "America/Sao_Paulo（巴西利亚时间，UTC-3）",
+          "Asia/Dubai": "Asia/Dubai（海湾时间，UTC+4）",
+          "Asia/Kolkata": "Asia/Kolkata（印度时间，UTC+5:30）",
+          "Asia/Seoul": "Asia/Seoul（韩国时间，UTC+9）",
+          "Asia/Shanghai": "Asia/Shanghai（北京时间，UTC+8）",
+          "Asia/Singapore": "Asia/Singapore（新加坡时间，UTC+8）",
+          "Asia/Tokyo": "Asia/Tokyo（日本时间，UTC+9）",
+          "Australia/Sydney": "Australia/Sydney（澳洲东部时间，UTC+10/+11）",
+          "Europe/Berlin": "Europe/Berlin（中部欧洲时间，UTC+1/+2）",
+          "Europe/London": "Europe/London（英国时间，UTC+0/+1）",
+          "Europe/Moscow": "Europe/Moscow（莫斯科时间，UTC+3）",
+          "Europe/Paris": "Europe/Paris（中部欧洲时间，UTC+1/+2）",
+          "Pacific/Auckland": "Pacific/Auckland（新西兰时间，UTC+12/+13）",
+          "UTC": "UTC（协调世界时）"
+        }
       },
       "heartbeat": {
         "title": "心跳",
@@ -611,7 +692,9 @@
         "useAccess": "使用",
         "useAccessDesc": "任务、聊天、工具、技能、工作区",
         "manageAccess": "管理",
-        "manageAccessDesc": "完全访问权限，包括设置、心智、通讯录"
+        "manageAccessDesc": "完全访问权限，包括设置、心智、通讯录",
+        "currentAccess": "当前权限",
+        "readOnly": "只读"
       },
       "tools": {
         "platformTools": "平台预置工具",
@@ -712,7 +795,8 @@
         "description": "当用户在网页端发起新对话时，Agent 会自动发送的欢迎语。支持 Markdown 语法。留空则不发送。",
         "saved": "已保存",
         "placeholder": "例如：你好！我是你的 AI 助手，有什么可以帮你的吗？"
-      }
+      },
+      "modelDisabledWarning": "这个模型已经停用，助手会回退到默认模型。"
     },
     "tools": {
       "platformTools": "平台预置工具",
@@ -766,7 +850,23 @@
       "reloadPage": "重新加载页面",
       "selectAgent": "— 选择数字员工 —",
       "failedToCreateSession": "创建会话失败",
-      "failed": "失败"
+      "failed": "失败",
+      "authorizationCheckFailed": "授权检查失败",
+      "authorizationConnected": "已连接",
+      "authorizationUnavailable": "授权不可用",
+      "authorized": "已授权",
+      "checkAuthorization": "检查授权",
+      "collapseAll": "全部收起",
+      "expandAll": "全部展开",
+      "mcpGroupDescription": "MCP 服务器提供的工具。",
+      "noMatchingTools": "没有匹配的工具。",
+      "searchTools": "搜索工具",
+      "sourceTabs": "来源",
+      "toolTestUnknown": "工具测试结果未知",
+      "toolTestUnsupported": "这个工具不支持测试",
+      "toolsUnavailable": "工具不可用",
+      "toolsUnverified": "工具未验证",
+      "toolsVerified": "工具已验证"
     },
     "toolCategories": {
       "file": "文件操作",
@@ -787,7 +887,9 @@
     "upload": {
       "success": "上传成功",
       "failed": "上传失败",
-      "uploading": "上传中..."
+      "uploading": "上传中...",
+      "dropToAttach": "拖到这里作为附件",
+      "unsupported": "这个文件不支持上传。"
     },
     "skillNames": {
       "web-research": "网络研究",
@@ -872,16 +974,38 @@
         "cookiesHelpLink": "Cookie-Editor",
         "cookiesHelpSuffix": "或类似浏览器扩展导出的 Cookie。必须是 JSON 数组格式。"
       }
+    },
+    "detailLabel": "详情",
+    "statusLabel": "状态",
+    "tabsLabel": "标签",
+    "toolsLabel": "工具",
+    "activity": {
+      "recent": "最近活动"
+    },
+    "openclaw": {
+      "connection": "连接",
+      "lastSeen": "上次在线",
+      "managedBy": "由它管理",
+      "model": "模型",
+      "never": "从未",
+      "notConnected": "没有连接",
+      "type": "类型"
+    },
+    "sidePanel": {
+      "browser": "浏览器",
+      "closeCode": "收起代码",
+      "code": "代码",
+      "desktop": "桌面",
+      "from": "来自",
+      "previewTabs": "预览",
+      "to": "到",
+      "transfer": "传输",
+      "transferDone": "传输完成",
+      "transferRunning": "正在传输"
     }
   },
   "wizard": {
-    "steps": {
-      "basicInfo": "基本信息",
-      "personality": "人格设定",
-      "skills": "技能配置",
-      "permissions": "权限设置",
-      "channel": "通道绑定"
-    },
+    "steps": "步骤",
     "next": "下一步",
     "prev": "上一步",
     "finish": "完成创建",
@@ -1051,7 +1175,13 @@
     "placeholder": "输入消息...",
     "send": "发送",
     "deleteSession": "删除会话",
-    "deleteConfirm": "确定删除这个会话及其所有消息？此操作无法撤销。"
+    "deleteConfirm": "确定删除这个会话及其所有消息？此操作无法撤销。",
+    "modelSwitcher": {
+      "defaultTag": "默认",
+      "none": "还没有模型",
+      "title": "换一个模型"
+    },
+    "stop": "停止"
   },
   "messages": {
     "title": "消息中心",
@@ -1097,7 +1227,8 @@
       "searchPlaceholder": "搜索国家或地区、代码或时区",
       "collapseRegionList": "收起地区列表",
       "expandRegionList": "展开地区列表",
-      "noMatch": "没有匹配的国家或地区"
+      "noMatch": "没有匹配的国家或地区",
+      "noTenant": "还没有组织。"
     },
     "systemEmail": {
       "title": "系统邮件配置",
@@ -1111,7 +1242,13 @@
       "timeout": "超时时间（秒）",
       "useSsl": "使用 SSL/TLS",
       "hint": "对于 Gmail，请使用应用密码。对于 QQ/163 邮箱，请使用 SMTP 授权码。",
-      "sendTest": "发送测试邮件"
+      "sendTest": "发送测试邮件",
+      "disabledHint": "系统邮件是关着的。",
+      "enabled": "已启用",
+      "enabledHint": "系统邮件已开启。",
+      "send": "发送",
+      "testPlaceholder": "收件地址",
+      "testSuccess": "测试邮件已发出。"
     },
     "quotas": {
       "defaultUserQuotas": "默认用户配额",
@@ -1228,7 +1365,38 @@
       "temperatureDesc": "留空使用提供商默认值。o1/o3 推理模型通常需要 1.0",
       "deleteConfirm": "停用 {{name}}？现有数字员工和历史记录会保留模型引用，后续调用会自动选择其他可用模型。",
       "deleteDone": "模型已停用",
-      "deleteFailed": "删除模型失败"
+      "deleteFailed": "删除模型失败",
+      "agentCompatibilityTest": "助手兼容性测试",
+      "clickToDisable": "点一下停用",
+      "clickToEnable": "点一下启用",
+      "compactModel": "压缩模型",
+      "defaultBadge": "默认",
+      "defaultSaveFailed": "默认模型没有保存。",
+      "defaultSaved": "默认模型已保存。",
+      "draftTestSuccess": "草稿测试通过。",
+      "noRuntimeModelCandidates": "没有可用的运行时模型。",
+      "planningModel": "规划模型",
+      "runtimeModelsHint": "运行时模型是助手真正用的模型。",
+      "runtimeModelsSaveFailed": "运行时模型没有保存。",
+      "runtimeModelsSaved": "运行时模型已保存。",
+      "runtimeModelsTitle": "运行时模型",
+      "selectRuntimeModel": "选择运行时模型",
+      "setAsDefault": "设为默认",
+      "setAsDefaultTitle": "设为默认模型",
+      "testErrorShort": "测试出错",
+      "testFailedShort": "测试失败",
+      "testSuccessWithTools": "测试通过，工具也可用。",
+      "testTitle": "测试这个模型",
+      "toolsRegistry": "工具清单",
+      "toolsRegistryTitle": "工具清单",
+      "toolsUnavailable": "工具不可用",
+      "toolsUnavailableTitle": "工具不可用",
+      "toolsUnverified": "工具未验证",
+      "toolsUnverifiedTitle": "工具未验证",
+      "toolsVerified": "工具已验证",
+      "toolsVerifiedTitle": "工具已验证",
+      "toolTestUnknown": "连接成功，但原生工具调用暂未确认",
+      "toolTestUnsupported": "连接成功，但原生工具调用不可用"
     },
     "tools": {
       "title": "全局工具管理",
@@ -1433,7 +1601,11 @@
         "agentbay_computer_dismiss_dialog": "[ENV: Cloud Desktop] 仅通过 Escape 安全关闭当前应用内弹窗或对话框。",
         "agentbay_computer_list_visible_apps": "[ENV: Cloud Desktop] 列出云桌面中正在运行的应用程序。",
         "atlassian_rovo": "连接到 Atlassian Rovo MCP 服务器以访问 Jira、Confluence 和 Compass。"
-      }
+      },
+      "configureSettings": "配置设置",
+      "import": "导入",
+      "importFailed": "导入没有成功。",
+      "sourceTabs": "来源"
     },
     "org": {
       "feishuSync": "飞书通讯录同步配置",
@@ -1584,7 +1756,8 @@
       "companyInvitation": "公司邀请",
       "companyInvitationDesc": "管理员邀请用户加入公司时发送。",
       "companyInvitationSubject": "{{inviter_name}} 邀请您加入 {{company_name}} 的 Clawith 团队",
-      "companyInvitationBody": "您好，\n\n{{inviter_name}} 邀请您加入他们在 Clawith 的团队\"{{company_name}}\"。\n\n要接受邀请并创建您的账号，请点击以下链接：\n\n{{invite_url}}\n\n如果您不想加入此团队或没有预期此邀请，可以忽略此邮件。"
+      "companyInvitationBody": "您好，\n\n{{inviter_name}} 邀请您加入他们在 Clawith 的团队\"{{company_name}}\"。\n\n要接受邀请并创建您的账号，请点击以下链接：\n\n{{invite_url}}\n\n如果您不想加入此团队或没有预期此邀请，可以忽略此邮件。",
+      "clickToInsert": "点一下就放进去"
     },
     "users": {
       "user": "用户",
@@ -1604,7 +1777,10 @@
       "permanent": "永久",
       "daily": "每天",
       "weekly": "每周",
-      "monthly": "每月"
+      "monthly": "每月",
+      "agentTTL": "助手存活时长",
+      "maxAgents": "助手上限",
+      "msgLimit": "消息上限"
     },
     "identity": {
       "ssoUrlEmpty": "请先开启 SSO 以生成地址",
@@ -1676,8 +1852,18 @@
         "messagingTitle": "3. AI 主动发送一对一消息",
         "messagingDesc": "向企微成员主动发消息，需先获取有效的 API access_token，而获取 token 的请求 IP 必须在自建应用的「企业可信IP」白名单中。与飞书不同，企微对所有 API 调用均强制要求 IP 白名单，没有仅凭 token 认证的选项。",
         "footerText": "由于上述限制，目前大多数用户无法轻松完成企业微信集成配置。我们正在积极探索替代方案——包括申请企微服务商（ISV）资质及寻找限制更少的接入方式——同时也希望企微能够降低对 SaaS 平台的接入门槛。待可行路径明确后，配置入口将重新开启。"
-      }
-    }
+      },
+      "saveFirst": "先保存，再设置单点登录。",
+      "ssoDisabledHint": "单点登录是关着的。",
+      "ssoDomain": "单点登录域名",
+      "ssoDomainDesc": "这个域名下的邮箱会走单点登录。",
+      "ssoDomainPlaceholder": "sso.example.com",
+      "ssoIpConflict": "这个域名已经有别的组织在用了。",
+      "ssoTitle": "单点登录",
+      "ssoToggleFailed": "单点登录没有切换成功。"
+    },
+    "tabsLabel": "标签",
+    "deleteCompanyConfirm": "删除这个组织？"
   },
   "dialog": {
     "confirmTitle": "请确认",
@@ -1730,7 +1916,8 @@
       "toolRemoveFailed": "移除工具失败",
       "modelDeleteFailed": "删除模型失败",
       "configDeleteFailed": "删除配置失败",
-      "companyDisableFailed": "禁用公司失败"
+      "companyDisableFailed": "禁用公司失败",
+      "loadFailed": "没有打开。"
     },
     "close": "关闭",
     "edit": "编辑",
@@ -1799,7 +1986,14 @@
     "toast": {
       "collapseDetails": "收起详情",
       "viewDetails": "查看详情"
-    }
+    },
+    "clear": "清空",
+    "disabled": "已停用",
+    "enabled": "已启用",
+    "minutes": "分钟",
+    "remove": "移除",
+    "saveFailed": "没有保存。",
+    "saved": "已保存"
   },
   "admin": {
     "title": "公司管理",
@@ -1854,7 +2048,8 @@
     "all": "全部",
     "filterStatus": "按状态筛选",
     "enable": "启用",
-    "noFilterResults": "没有符合当前筛选条件的公司。"
+    "noFilterResults": "没有符合当前筛选条件的公司。",
+    "leaveBlankDefault": "留空表示使用默认"
   },
   "companySetup": {
     "title": "设置你的公司",
@@ -2312,7 +2507,21 @@
     "memberCount": "{{count}} 位成员",
     "showPanel": "展开面板",
     "hidePanel": "收起面板",
-    "dragToResize": "拖动调整宽度"
+    "dragToResize": "拖动调整宽度",
+    "cancelAccepted": "取消已接受",
+    "cancelFailed": "取消没有成功。",
+    "cancelRun": "取消这一轮",
+    "dangerZone": "危险区域",
+    "descriptionPlaceholder": "这个群是做什么的",
+    "groupDescription": "群简介",
+    "groupName": "群名称",
+    "selectedCount": "已选 {{count}} 个",
+    "settings": "群设置",
+    "settingsSaveFailed": "群设置没有保存。",
+    "settingsSaved": "群设置已保存。",
+    "taskPlanning": "任务规划",
+    "agentCount_one": "{{count}} 个助手",
+    "memberCount_one": "{{count}} 位成员"
   },
   "experience": {
     "title": "经验库",
@@ -2343,5 +2552,12 @@
     "emptyBody": "在与数字员工的对话里点「沉淀为经验」，或直接新建，把团队踩过的坑沉淀下来——AI 会在相关任务中自动检索复用。",
     "sidebarEmpty": "有了已发布经验后，这里会显示热门贡献者与标签。",
     "mineEmpty": "这个分类下还没有经验。"
-  }
+  },
+  "okr": {
+    "title": "OKR",
+    "companyObjectives": "组织目标",
+    "memberObjectives": "成员目标"
+  },
+  "agentLabel": "助手",
+  "enterpriseLabel": "企业"
 }

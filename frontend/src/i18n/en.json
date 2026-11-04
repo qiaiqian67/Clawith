@@ -46,7 +46,12 @@
     "topContributors": "Top Contributors",
     "trendingTags": "Trending Topics",
     "tips": "Tips",
-    "justNow": "just now"
+    "justNow": "just now",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deleteConfirmMessage": "Delete this post? It cannot come back.",
+    "deleteConfirmTitle": "Delete the post",
+    "deletePost": "Delete the post"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -59,7 +64,9 @@
     "language": "Language",
     "plaza": "Plaza",
     "okr": "OKR",
-    "groups": "Groups"
+    "groups": "Groups",
+    "adminCompanies": "Companies",
+    "platformSettings": "Platform settings"
   },
   "talentMarket": {
     "title": "Talent Market",
@@ -70,7 +77,18 @@
     "customTitle": "Build custom",
     "customCategory": "Custom",
     "customDescription": "Define identity, personality, permissions, and tools from scratch.",
-    "customStart": "Start"
+    "customStart": "Start",
+    "empty": "There is nothing here.",
+    "emptySearch": "Nothing matches.",
+    "externalAgentHint": "These assistants come from outside.",
+    "searchLabel": "Search",
+    "searchPlaceholder": "Search the assistants…",
+    "tabMarketing": "Marketing",
+    "tabOffice": "Office",
+    "tabPopular": "Popular",
+    "tabSWE": "Engineering",
+    "tabTrading": "Trading",
+    "tabsAria": "The kinds of the talent market"
   },
   "auth": {
     "login": "Login",
@@ -136,7 +154,15 @@
     "refresh": "Refresh QR code",
     "loginWithSSO": "Enterprise SSO Login",
     "ssoNotice": "Enterprise SSO is enabled for this domain.",
-    "standardLogin": "Standard Login"
+    "standardLogin": "Standard Login",
+    "checkingInvitation": "Checking the invitation…",
+    "createOrJoinOrganization": "Create or join an organization",
+    "emailAlreadyRegistered": "This address is registered already.",
+    "multiTenantPrompt": "You are in more than one organization. Pick one to go on.",
+    "selectOrganization": "Pick an organization",
+    "ssoLoadFailed": "The ways to sign in did not open.",
+    "ssoLoading": "Reading the ways to sign in…",
+    "ssoNoProviders": "This service has no single sign-on."
   },
   "roles": {
     "platformAdmin": "Platform Admin",
@@ -279,7 +305,8 @@
       "peer": "Peer",
       "assistant": "Assistant",
       "direct_leader": "Direct Leader",
-      "other": "Other"
+      "other": "Other",
+      "descriptionPlaceholder": "What this assistant is for"
     },
     "directory": {
       "title": "Directory",
@@ -429,7 +456,10 @@
       "openInNewTab": "Open in new tab",
       "focusPreview": "Focus preview",
       "unfocusPreview": "Exit focus",
-      "versionHistory": "Version history"
+      "versionHistory": "Version history",
+      "confirmDelete": "Delete this file?",
+      "deleteFailed": "The file did not go away.",
+      "loadFailed": "The file did not open."
     },
     "chat": {
       "sessionListTitle": "Session list",
@@ -476,7 +506,41 @@
       "provider": "Provider",
       "toolName": "Tool",
       "inProgress": "In progress",
-      "done": "Done"
+      "done": "Done",
+      "goModelSettings": "Model settings",
+      "keepSourceFile": "Keep the source file",
+      "keepSourceFileConfirm": "Keep the source file",
+      "keepSourceFileMessage": "This message carries a source file. Keeping it lets the assistant see the whole file.",
+      "noModelAdmin": "No model yet",
+      "noModelMember": "No model available",
+      "noModelPlaceholder": "Connect a model first, then the assistant may answer.",
+      "noModelTitle": "No model",
+      "reconcileApplied": "Applied",
+      "reconcileAppliedConfirm": "Apply this change",
+      "reconcileAppliedMessage": "The change of the assistant is in the file.",
+      "reconcileFailed": "The change did not go in",
+      "reconcileNotApplied": "Not applied",
+      "reconcileNotAppliedConfirm": "Drop this change",
+      "reconcileNotAppliedMessage": "The change of the assistant was dropped; the file is as it was.",
+      "reconcileTitle": "What the assistant changed",
+      "reconcileUnknown": "The state is unknown",
+      "useAgentResult": "Use the version of the assistant",
+      "useAgentResultConfirm": "Use the version of the assistant",
+      "useAgentResultForRun": "Use it for this run",
+      "useAgentResultMessage": "The file is the version of the assistant.",
+      "waitingReplyPending": "Waiting for the answer",
+      "workspaceChecking": "Checking the files…",
+      "workspaceConflictBody": "You and the assistant changed the same file.",
+      "workspaceConflictCount": "{{count}} files conflict",
+      "workspaceConflictPending": "A conflict waits",
+      "workspaceConflictTitle": "File conflict",
+      "workspaceNotSaved": "Not saved",
+      "workspacePartial": "Partly saved",
+      "workspacePartialCount": "{{count}} files saved",
+      "workspaceSaved": "Saved",
+      "workspaceSavedCount": "{{count}} files saved",
+      "workspaceUnavailable": "The workspace is not there",
+      "workspaceVerifying": "Checking"
     },
     "activityLog": {
       "title": "Activity Log",
@@ -549,7 +613,12 @@
         "websocketConnected": "Connected via WebSocket (No callback URL needed)",
         "websocketDisconnected": "Configured for WebSocket, but currently disconnected",
         "websocketDisconnectedHint": "Reconnect by saving the WeCom WebSocket configuration again.",
-        "saveChannel": "Save Config"
+        "saveChannel": "Save Config",
+        "mode": "The way it connects",
+        "modeWebhook": "Webhook",
+        "modeWs": "WebSocket",
+        "usingCompanyConfig": "Using the company default ({{val}})",
+        "usingCompanyKey": "Using the company key ({{val}})"
       },
       "danger": {
         "title": "Danger Zone",
@@ -583,7 +652,9 @@
         "useAccess": "Use",
         "useAccessDesc": "Task, Chat, Tools, Skills, Workspace",
         "manageAccess": "Manage",
-        "manageAccessDesc": "Full access including Settings, Mind, and Directory"
+        "manageAccessDesc": "Full access including Settings, Mind, and Directory",
+        "currentAccess": "Current access",
+        "readOnly": "Read only"
       },
       "timezone": {
         "label": "Timezone",
@@ -607,7 +678,12 @@
           "America/Sao_Paulo": "America/Sao_Paulo (Brasilia Time, UTC-3)",
           "Australia/Sydney": "Australia/Sydney (Australian Eastern Time, UTC+10/+11)",
           "Pacific/Auckland": "Pacific/Auckland (New Zealand Time, UTC+12/+13)"
-        }
+        },
+        "current": "The timezone of the assistant",
+        "default": "↩ the default of the company",
+        "inherited": "Using the default timezone of the company",
+        "override": "A timezone of its own for this assistant",
+        "title": "Timezone"
       },
       "approvals": {
         "title": "Approvals",
@@ -632,6 +708,94 @@
         "description": "Greeting message sent automatically when a user starts a new web conversation. Supports Markdown. Leave empty to disable.",
         "saved": "Saved",
         "placeholder": "e.g. Hello! I'm your AI assistant. How can I help you?"
+      },
+      "modelDisabledWarning": "This model is off, so the assistant falls back to the default one.",
+      "heartbeat": {
+        "activeHours": "Active hours",
+        "activeHoursDesc": "The heartbeat fires only in these hours (HH:MM-HH:MM)",
+        "description": "The heartbeat — the assistant watches the plaza and the work around it.",
+        "enabled": "Turn the heartbeat on",
+        "enabledDesc": "The assistant checks the plaza and the state of the work now and then",
+        "interval": "How often it checks",
+        "intervalDesc": "How often the assistant looks for something new",
+        "lastRun": "The last heartbeat",
+        "title": "Heartbeat"
+      },
+      "toolCategories": {
+        "agentbay": "AgentBay",
+        "aware": "Awareness and triggers",
+        "code": "Code and execution",
+        "communication": "Communication",
+        "custom": "Custom",
+        "discovery": "Discovery",
+        "email": "Email",
+        "feishu": "Feishu",
+        "file": "Files",
+        "general": "General",
+        "okr": "OKR",
+        "search": "Search",
+        "social": "Social",
+        "task": "Tasks"
+      },
+      "tools": {
+        "adminOnly": "(only for an administrator)",
+        "agentInstalled": "The tools the assistant installed itself",
+        "browseClawhub": "Browse ClawHub",
+        "browseClawhubDesc": "Search ClawHub and install the skills into the workspace of this assistant.",
+        "browseClawhubTitle": "Browse ClawHub",
+        "company": "(company: {{val}})",
+        "companyTools": "The tools of the company",
+        "config": "️ Set it up",
+        "configJson": "The configuration JSON (the override of the assistant)",
+        "configureCategory": "Set up {{category}}",
+        "configurePerAgent": "Set up for this assistant",
+        "configured": "Set up",
+        "confirmDelete": "Take \"{{name}}\" away from this assistant?",
+        "deleteFailed": "It did not go away",
+        "enableDisableAll": "Turn every {{category}} tool on or off",
+        "expired": "Expired",
+        "failed": "Failed",
+        "failedToCreateSession": "The session did not start",
+        "globalDefault": "The default of the platform:",
+        "import": "Import",
+        "importFailed": "The import did not work",
+        "importFromPresets": "Import from the presets",
+        "importFromUrl": "Import from a link",
+        "importedFiles": "{{count}} files imported",
+        "importing": "Importing…",
+        "install": "Install",
+        "installed": "Installed",
+        "installedSuccess": "\"{{name}}\" installed ({{count}} files)",
+        "installing": "Installing…",
+        "leaveBlankDefault": "Leave blank for the default of the platform",
+        "noCompany": "No tool of the company yet",
+        "noInstalled": "No tool it installed itself yet",
+        "noPresetSkills": "No preset skill is there",
+        "perAgentConfig": "The configuration of the assistant (it overrides the default)",
+        "platformTools": "The tools of the platform",
+        "reloadPage": "Load the page again",
+        "removeTool": "Take it away from the assistant",
+        "resetToGlobal": "Back to the default",
+        "saveFailed": "It did not save",
+        "searchClawhubHint": "Search ClawHub for a skill",
+        "searchSkills": "Search the skills…",
+        "selectAgent": "— Pick an assistant —",
+        "setupGuide": "The guide",
+        "sharedCategoryConfig": "The shared configuration of the category (it reaches every tool in it)",
+        "somethingWentWrong": "Something went wrong",
+        "testConnection": "Test the connection",
+        "testFailed": "The test failed",
+        "testSuccessful": "The test passed",
+        "testing": "Testing…",
+        "unexpectedError": "Something unexpected happened while loading the page.",
+        "usingCompanyConfig": "Using the configuration of the company ({{val}})",
+        "usingCompanyKey": "Using the key of the company ({{val}})"
+      },
+      "upload": {
+        "failed": "The upload failed",
+        "success": "The upload went through",
+        "unsupported": "This kind of file is not supported: {{name}}",
+        "uploading": "Uploading…"
       }
     },
     "tools": {
@@ -686,7 +850,23 @@
       "reloadPage": "Reload Page",
       "selectAgent": "— Select Agent —",
       "failedToCreateSession": "Failed to create session",
-      "failed": "Failed"
+      "failed": "Failed",
+      "authorizationCheckFailed": "The authorization check failed",
+      "authorizationConnected": "Connected",
+      "authorizationUnavailable": "The authorization is not there",
+      "authorized": "Authorized",
+      "checkAuthorization": "Check the authorization",
+      "collapseAll": "Collapse all",
+      "expandAll": "Expand all",
+      "mcpGroupDescription": "The tools an MCP server provides.",
+      "noMatchingTools": "No tool matches.",
+      "searchTools": "Search the tools",
+      "sourceTabs": "Source",
+      "toolTestUnknown": "The result of the test is unknown",
+      "toolTestUnsupported": "This tool cannot be tested",
+      "toolsUnavailable": "The tools are not there",
+      "toolsUnverified": "The tools are unverified",
+      "toolsVerified": "The tools are verified"
     },
     "toolCategories": {
       "file": "File Operations",
@@ -708,7 +888,8 @@
       "success": "Upload successful",
       "failed": "Upload failed",
       "uploading": "Uploading...",
-      "unsupported": "Unsupported file type: {{name}}"
+      "unsupported": "This file cannot be uploaded.",
+      "dropToAttach": "Drop it here to attach"
     },
     "skillNames": {
       "web-research": "Web Research",
@@ -793,16 +974,38 @@
         "cookiesHelpLink": "Cookie-Editor",
         "cookiesHelpSuffix": "or similar browser extension. Must be a JSON array."
       }
+    },
+    "detailLabel": "Detail",
+    "statusLabel": "State",
+    "tabsLabel": "Tabs",
+    "toolsLabel": "Tools",
+    "activity": {
+      "recent": "Recent activity"
+    },
+    "openclaw": {
+      "connection": "Connection",
+      "lastSeen": "Last seen",
+      "managedBy": "Managed by it",
+      "model": "Model",
+      "never": "Never",
+      "notConnected": "Not connected",
+      "type": "Type"
+    },
+    "sidePanel": {
+      "browser": "Browser",
+      "closeCode": "Hide the code",
+      "code": "Code",
+      "desktop": "Desktop",
+      "from": "From",
+      "previewTabs": "Preview",
+      "to": "To",
+      "transfer": "Transfer",
+      "transferDone": "The transfer is done",
+      "transferRunning": "Transferring"
     }
   },
   "wizard": {
-    "steps": {
-      "basicInfo": "Basic Info",
-      "personality": "Personality",
-      "skills": "Skills",
-      "permissions": "Permissions",
-      "channel": "Channel"
-    },
+    "steps": "Steps",
     "next": "Next",
     "prev": "Previous",
     "finish": "Create",
@@ -890,7 +1093,12 @@
       "department": "Department",
       "departmentDesc": "Only selected department members can use",
       "selfOnly": "Self Only",
-      "selfOnlyDesc": "Only the creator can use; Plaza is disabled"
+      "selfOnlyDesc": "Only the creator can use; Plaza is disabled",
+      "accessLevel": "The access by default",
+      "manageDesc": "Every right: the settings, the mind, the contacts",
+      "manageLevel": "Manage",
+      "useDesc": "May use the tasks, the chat, the tools, the skills, the workspace",
+      "useLevel": "Use"
     },
     "step5": {
       "title": "Feishu Bot Configuration (Optional)",
@@ -967,7 +1175,13 @@
     "placeholder": "Type a message...",
     "send": "Send",
     "deleteSession": "Delete session",
-    "deleteConfirm": "Delete this session and all its messages? This cannot be undone."
+    "deleteConfirm": "Delete this session and all its messages? This cannot be undone.",
+    "modelSwitcher": {
+      "defaultTag": "default",
+      "none": "No model yet",
+      "title": "Another model"
+    },
+    "stop": "Stop"
   },
   "messages": {
     "title": "Messages",
@@ -1034,7 +1248,13 @@
       "timeout": "Timeout (seconds)",
       "useSsl": "Use SSL/TLS",
       "hint": "For Gmail, use an App Password. For QQ/163 mail, use the SMTP authorization code.",
-      "sendTest": "Send Test Email"
+      "sendTest": "Send Test Email",
+      "disabledHint": "The system mail is off.",
+      "enabled": "On",
+      "enabledHint": "The system mail is on.",
+      "send": "Send",
+      "testPlaceholder": "The address",
+      "testSuccess": "The test mail went out."
     },
     "quotas": {
       "defaultUserQuotas": "Default User Quotas",
@@ -1108,7 +1328,38 @@
       "temperatureDesc": "Leave empty to use the provider default. o1/o3 reasoning models usually require 1.0",
       "deleteConfirm": "Disable {{name}}? Existing agents and history keep their model references; new calls will use another available model.",
       "deleteDone": "Model disabled",
-      "deleteFailed": "Failed to delete model"
+      "deleteFailed": "Failed to delete model",
+      "agentCompatibilityTest": "Test for the assistant",
+      "clickToDisable": "Click to turn it off",
+      "clickToEnable": "Click to turn it on",
+      "compactModel": "The model that compacts",
+      "defaultBadge": "default",
+      "defaultSaveFailed": "The default model did not save.",
+      "defaultSaved": "The default model is saved.",
+      "draftTestSuccess": "The draft passed the test.",
+      "noRuntimeModelCandidates": "No model may run.",
+      "planningModel": "The model that plans",
+      "runtimeModelsHint": "The runtime models are the ones the assistants really use.",
+      "runtimeModelsSaveFailed": "The runtime models did not save.",
+      "runtimeModelsSaved": "The runtime models are saved.",
+      "runtimeModelsTitle": "Runtime models",
+      "selectRuntimeModel": "Pick a runtime model",
+      "setAsDefault": "Make it the default",
+      "setAsDefaultTitle": "Make it the default model",
+      "testErrorShort": "The test broke",
+      "testFailedShort": "The test failed",
+      "testSuccessWithTools": "The test passed, and the tools are there.",
+      "testTitle": "Test this model",
+      "toolsRegistry": "The tools",
+      "toolsRegistryTitle": "The tools",
+      "toolsUnavailable": "The tools are not there",
+      "toolsUnavailableTitle": "The tools are not there",
+      "toolsUnverified": "The tools are unverified",
+      "toolsUnverifiedTitle": "The tools are unverified",
+      "toolsVerified": "The tools are verified",
+      "toolsVerifiedTitle": "The tools are verified",
+      "toolTestUnknown": "The connection works, but the native tool calls are not confirmed yet",
+      "toolTestUnsupported": "The connection works, but the native tool calls are not there"
     },
     "tools": {
       "title": "Global Tool Management",
@@ -1313,7 +1564,11 @@
         "agentbay_computer_dismiss_dialog": "[ENV: Cloud Desktop] Safely dismiss the active in-app popup/dialog with Escape only.",
         "agentbay_computer_list_visible_apps": "[ENV: Cloud Desktop] List running applications in the cloud desktop.",
         "atlassian_rovo": "Connect to Atlassian Rovo MCP Server to access Jira, Confluence, and Compass."
-      }
+      },
+      "configureSettings": "Set it up",
+      "import": "Import",
+      "importFailed": "The import did not work.",
+      "sourceTabs": "Source"
     },
     "org": {
       "feishuSync": "Feishu Directory Sync",
@@ -1373,7 +1628,8 @@
       "maxRoundsPlaceholder": "Default 20",
       "save": "Save",
       "saved": "Saved",
-      "themeColor": "Theme Color"
+      "themeColor": "Theme Color",
+      "maxRoundsDesc": "The most rounds two assistants may talk in one collaboration. It decides how much they may say to each other."
     },
     "broadcast": {
       "title": "Broadcast Notification",
@@ -1397,7 +1653,8 @@
       "edit": "Edit",
       "cancel": "Cancel",
       "viewFile": "View File",
-      "confirmDelete": "Confirm Delete"
+      "confirmDelete": "Confirm Delete",
+      "description": "Files everyone shares; every assistant reaches them in the directory enterprise_info/."
     },
     "audit": {
       "title": "Audit Log",
@@ -1489,7 +1746,15 @@
         "messagingTitle": "3. Proactive 1-to-1 Messaging (AI-initiated)",
         "messagingDesc": "Sending messages to individual users requires a valid WeCom API access token, which can only be obtained from a server IP that has been whitelisted in the self-built app's settings. Unlike Feishu, WeCom mandates IP-level restrictions on all API calls — there is no token-only authentication option.",
         "footerText": "Due to the above constraints, WeCom integration currently cannot be easily set up by most users. We are actively exploring alternative approaches — including WeCom ISV (service provider) registration and lower-friction API options — or we may advocate for WeCom to relax these restrictions for SaaS platforms. Configuration will be re-enabled once a viable path is available."
-      }
+      },
+      "saveFirst": "Save first, then set the single sign-on.",
+      "ssoDisabledHint": "The single sign-on is off.",
+      "ssoDomain": "Single sign-on domain",
+      "ssoDomainDesc": "The addresses of this domain sign in through the single sign-on.",
+      "ssoDomainPlaceholder": "sso.example.com",
+      "ssoIpConflict": "Another organization has this domain.",
+      "ssoTitle": "Single sign-on",
+      "ssoToggleFailed": "The single sign-on did not switch."
     },
     "dangerZone": "️ Danger Zone",
     "deleteCompanyDesc": "Permanently delete this company and all its data, including agents, models, tools, and skills. This action cannot be undone.",
@@ -1517,7 +1782,8 @@
       "companyInvitation": "Company Invitation",
       "companyInvitationDesc": "Sent when an admin invites a user to join their company.",
       "companyInvitationSubject": "{{inviter_name}} invited you to join {{company_name}} on Clawith",
-      "companyInvitationBody": "Hello,\n\n{{inviter_name}} has invited you to join their team '{{company_name}}' on Clawith.\n\nTo accept the invitation and create your account, please click the link below:\n\n{{invite_url}}\n\nIf you don't want to join this team or didn't expect this invitation, you can ignore this email."
+      "companyInvitationBody": "Hello,\n\n{{inviter_name}} has invited you to join their team '{{company_name}}' on Clawith.\n\nTo accept the invitation and create your account, please click the link below:\n\n{{invite_url}}\n\nIf you don't want to join this team or didn't expect this invitation, you can ignore this email.",
+      "clickToInsert": "Click to put it in"
     },
     "timezone": {
       "title": "Company Timezone",
@@ -1547,7 +1813,8 @@
       "searchPlaceholder": "Search country, code, or timezone",
       "collapseRegionList": "Collapse region list",
       "expandRegionList": "Expand region list",
-      "noMatch": "No matching country or region"
+      "noMatch": "No matching country or region",
+      "noTenant": "No organization yet."
     },
     "users": {
       "user": "User",
@@ -1567,7 +1834,10 @@
       "permanent": "Permanent",
       "daily": "Daily",
       "weekly": "Weekly",
-      "monthly": "Monthly"
+      "monthly": "Monthly",
+      "agentTTL": "How long an assistant lives",
+      "maxAgents": "The limit of assistants",
+      "msgLimit": "The limit of messages"
     },
     "companyName": {
       "title": "Company Name",
@@ -1591,7 +1861,9 @@
       "title": "Company Intro",
       "description": "Describe your company's mission, products, and culture. This information will be included as context in every Agent conversation.",
       "hint": "This content will appear in every Agent's system prompt"
-    }
+    },
+    "tabsLabel": "Tabs",
+    "deleteCompanyConfirm": "Delete this organization?"
   },
   "dialog": {
     "confirmTitle": "Please confirm",
@@ -1642,7 +1914,8 @@
       "toolRemoveFailed": "Failed to remove tool",
       "modelDeleteFailed": "Failed to delete model",
       "configDeleteFailed": "Failed to delete configuration",
-      "companyDisableFailed": "Failed to disable company"
+      "companyDisableFailed": "Failed to disable company",
+      "loadFailed": "It did not open."
     },
     "close": "Close",
     "edit": "Edit",
@@ -1713,7 +1986,14 @@
     "toast": {
       "collapseDetails": "Collapse Details",
       "viewDetails": "View Details"
-    }
+    },
+    "clear": "Clear",
+    "disabled": "Off",
+    "enabled": "On",
+    "minutes": "minutes",
+    "remove": "Remove",
+    "saveFailed": "It did not save.",
+    "saved": "Saved"
   },
   "openclaw": {
     "created": "OpenClaw Agent Created",
@@ -1728,7 +2008,16 @@
     "type": "Type",
     "never": "Never",
     "model": "Model",
-    "managedBy": "Managed by OpenClaw"
+    "managedBy": "Managed by OpenClaw",
+    "basicDesc": "Give your OpenClaw assistant a name and a description. The model, the character and the skills are set on your own OpenClaw.",
+    "basicTitle": "Connect an OpenClaw assistant",
+    "createBtn": "Connect the assistant",
+    "namePlaceholder": "e.g. My OpenClaw bot",
+    "nativeDesc": "A whole assistant that runs on the Clawith platform",
+    "nativeTitle": "On the platform",
+    "openclawDesc": "Connect an OpenClaw assistant you already have",
+    "openclawTitle": "Connect OpenClaw",
+    "rolePlaceholder": "e.g. the personal assistant on my Mac"
   },
   "channelGuide": {
     "setupGuide": "Setup Guide",
@@ -1927,7 +2216,11 @@
     "companyNamePlaceholder": "Company name",
     "createBtn": "Create",
     "hint": "You can invite members anytime from Company Settings.",
-    "contactAdmin": "Contact your platform administrator for an invitation code."
+    "contactAdmin": "Contact your platform administrator for an invitation code.",
+    "codePlaceholder": "The invitation code",
+    "create": "Create",
+    "join": "Join",
+    "namePlaceholder": "The name of the company"
   },
   "admin": {
     "tab": {
@@ -1977,7 +2270,13 @@
     "ssoConfigDesc": "Configure SSO and custom domain for this company.",
     "ssoEnabled": "Enable SSO",
     "ssoDomain": "Custom Access Domain",
-    "ssoDomainPlaceholder": "e.g. acme.clawith.com"
+    "ssoDomainPlaceholder": "e.g. acme.clawith.com",
+    "leaveBlankDefault": "Leave blank for the default",
+    "adminInviteCode": "The admin invitation code (one use only; the first user becomes the company admin):",
+    "desc": "Manage every company, create new ones, and set the platform settings.",
+    "inviteCodeRequired": "Registration needs an invitation code",
+    "inviteCodeRequiredDesc": "When this is on, a new user needs a valid invitation code to register.",
+    "title": "Companies"
   },
   "postHire": {
     "title": "Configure new teammate",
@@ -2192,7 +2491,19 @@
     "memberCount_one": "{{count}} member",
     "showPanel": "Show panel",
     "hidePanel": "Hide panel",
-    "dragToResize": "Drag to resize"
+    "dragToResize": "Drag to resize",
+    "cancelAccepted": "The acceptance is cancelled",
+    "cancelFailed": "The cancel did not work.",
+    "cancelRun": "Cancel this run",
+    "dangerZone": "The dangerous part",
+    "descriptionPlaceholder": "What this group is for",
+    "groupDescription": "The description of the group",
+    "groupName": "The name of the group",
+    "selectedCount": "{{count}} chosen",
+    "settings": "The settings of the group",
+    "settingsSaveFailed": "The settings did not save.",
+    "settingsSaved": "The settings are saved.",
+    "taskPlanning": "Planning the work"
   },
   "experience": {
     "title": "Experience",
@@ -2223,5 +2534,30 @@
     "emptyBody": "In a chat with a digital employee, click “Distill to experience”, or create one directly — capture what the team learned and AI will retrieve it on relevant tasks.",
     "sidebarEmpty": "Once entries are published, top contributors and tags will show here.",
     "mineEmpty": "No experience under this category yet."
-  }
+  },
+  "okr": {
+    "title": "OKR",
+    "companyObjectives": "The objectives of the organization",
+    "memberObjectives": "The objectives of the people"
+  },
+  "identity": {
+    "addProvider": "Add a source",
+    "config": "The configuration (JSON)",
+    "configExample": "An example of the configuration",
+    "deleteConfirm": "Take this source of accounts away?",
+    "name": "The name that is shown",
+    "providerHints": {
+      "dingtalk": "DingTalk: app_key, app_secret",
+      "feishu": "Feishu: app_id, app_secret (encrypt_key and verification_token are optional)",
+      "google_workspace": "Google Workspace: the same Client ID and Client Secret serve the single sign-on and the directory sync of an administrator",
+      "microsoft_teams": "Microsoft Teams: client_id, client_secret, tenant_id",
+      "oauth2": "OAuth2: the App ID, the App Secret, the address of the permission, the address of the token, the address of the user",
+      "saml": "SAML: entry_point, issuer, cert (the public key)",
+      "wecom": "WeCom: the classic way needs corp_id, secret, agent_id; the smart robot needs bot_id, bot_secret"
+    },
+    "title": "The organization and the accounts",
+    "type": "The kind"
+  },
+  "agentLabel": "Assistant",
+  "enterpriseLabel": "Organization"
 }
