@@ -1,0 +1,61 @@
+{
+  "name": "zerox-desktop",
+  "productName": "ZeroX",
+  "desktopName": "zerox.desktop",
+  "version": "0.1.0",
+  "description": "The ZeroX desktop client for the ZeroX multi-agent platform.",
+  "author": {
+    "name": "ZeroX"
+  },
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "main": "out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json",
+    "typecheck:web": "tsc --noEmit -p tsconfig.web.json",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "node --experimental-strip-types --test tests/contract.test.mjs tests/chat-packet.test.mjs tests/markdown.test.mjs tests/message-images.test.mjs",
+    "test:e2e": "node --experimental-strip-types --test tests/e2e-chat.test.mjs",
+    "test:e2e:group": "node --experimental-strip-types --test tests/e2e-group.test.mjs",
+    "test:e2e:agent": "node --experimental-strip-types --test tests/e2e-agent.test.mjs",
+    "package": "node scripts/package.mjs",
+    "package:win": "node scripts/package.mjs --win",
+    "package:mac": "node scripts/package.mjs --mac",
+    "package:linux": "node scripts/package.mjs --linux",
+    "package:dir": "node scripts/package.mjs --dir"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^3.40.0",
+    "@tanstack/react-query": "^5.0.0",
+    "i18next": "^24.0.0",
+    "i18next-browser-languagedetector": "^8.2.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-i18next": "^15.0.0",
+    "react-router-dom": "^7.0.0",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "electron": "^45.2.1",
+    "electron-builder": "^26.18.0",
+    "electron-updater": "^6.8.11",
+    "electron-vite": "^6.0.0",
+    "eslint": "^10.9.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.11.0",
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.68.0",
+    "vite": "^6.0.0"
+  }
+}

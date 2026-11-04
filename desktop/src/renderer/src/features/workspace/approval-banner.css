@@ -1,0 +1,43 @@
+/*
+ * The banner of an approval the Agent is waiting for.
+ */
+
+.zx-approval-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-2) var(--zx-space-4);
+  border-bottom: 1px solid var(--zx-border);
+  background: var(--zx-warning-soft);
+  color: var(--zx-text-primary);
+}
+
+.zx-approval-text {
+  display: flex;
+  align-items: baseline;
+  gap: var(--zx-space-2);
+  min-width: 0;
+  font-size: var(--zx-text-md);
+}
+
+.zx-approval-detail {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-approval-actions {
+  display: flex;
+  flex: none;
+  gap: var(--zx-space-2);
+}
+
+.zx-approval-actions .zx-button-primary,
+.zx-approval-actions .zx-button-ghost {
+  height: 28px;
+  padding: 0 var(--zx-space-3);
+  font-size: var(--zx-text-sm);
+}

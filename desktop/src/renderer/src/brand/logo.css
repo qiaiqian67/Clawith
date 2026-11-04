@@ -1,0 +1,20 @@
+.zx-app-logo {
+  --zx-logo-eye-x: 0%;
+  --zx-logo-eye-y: 0%;
+  display: block;
+  flex: none;
+  overflow: visible;
+}
+
+.zx-app-logo[data-variant='dev'] rect {
+  fill: var(--zx-logo-dev);
+}
+
+.zx-app-logo[data-variant='preview'] rect {
+  fill: var(--zx-logo-preview);
+}
+
+.zx-app-logo circle {
+  transform: translate(var(--zx-logo-eye-x), var(--zx-logo-eye-y));
+  transition: transform var(--zx-duration-normal) var(--zx-ease-out);
+}

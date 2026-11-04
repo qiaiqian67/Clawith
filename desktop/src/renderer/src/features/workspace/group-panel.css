@@ -1,0 +1,111 @@
+/*
+ * The conversation of one group.
+ */
+
+.zx-group {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
+
+.zx-group-empty {
+  margin: auto;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-md);
+}
+
+.zx-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-3) var(--zx-space-6);
+  border-bottom: 1px solid var(--zx-border);
+}
+
+.zx-group-title {
+  margin: 0;
+  font-size: var(--zx-text-xl);
+  font-weight: var(--zx-weight-semibold);
+}
+
+.zx-group-state {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-group-sessions {
+  display: flex;
+  gap: var(--zx-space-2);
+  padding: var(--zx-space-2) var(--zx-space-6);
+  border-bottom: 1px solid var(--zx-border);
+  overflow-x: auto;
+}
+
+.zx-group-session {
+  flex: none;
+  padding: var(--zx-space-1) var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-pill);
+  background: transparent;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  cursor: pointer;
+}
+
+.zx-group-session[data-active='true'] {
+  border-color: var(--zx-border-strong);
+  background: var(--zx-bg-control-active);
+  color: var(--zx-text-primary);
+}
+
+.zx-group-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-6);
+}
+
+.zx-group-turn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-1);
+  max-width: 72%;
+}
+
+.zx-group-turn[data-role='user'] {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.zx-group-sender {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-group-bubble {
+  padding: var(--zx-space-3) var(--zx-space-4);
+  border-radius: var(--zx-radius-bubble);
+  background: var(--zx-bg-surface);
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-lg);
+  line-height: var(--zx-leading-lg);
+  word-break: break-word;
+}
+
+.zx-group-turn[data-role='user'] .zx-group-bubble {
+  background: var(--zx-bg-control-active);
+  border-bottom-right-radius: var(--zx-radius-sm);
+  white-space: pre-wrap;
+}
+
+.zx-group-error {
+  margin: 0;
+  padding: 0 var(--zx-space-6) var(--zx-space-2);
+  color: var(--zx-danger-text);
+  font-size: var(--zx-text-sm);
+}

@@ -1,0 +1,62 @@
+/*
+ * The first screen of a new installation: the address of the server.
+ */
+
+.zx-server-setup {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  background: var(--zx-bg-canvas);
+  color: var(--zx-text-primary);
+}
+
+.zx-server-setup-shell {
+  width: min(100%, 460px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-3);
+  padding: 52px 24px;
+}
+
+.zx-server-setup-title {
+  margin: 0;
+  font-size: var(--zx-text-3xl);
+  font-weight: var(--zx-weight-semibold);
+  letter-spacing: -0.03em;
+}
+
+.zx-server-setup-subtitle {
+  margin: 0 0 var(--zx-space-2);
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-md);
+  line-height: var(--zx-leading-md);
+}
+
+.zx-server-setup-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+}
+
+.zx-server-setup-status {
+  margin: 0;
+  font-size: var(--zx-text-sm);
+  line-height: var(--zx-leading-sm);
+}
+
+.zx-server-setup-status[data-tone='error'] {
+  color: var(--zx-danger-text);
+}
+
+.zx-server-setup-status[data-tone='ok'] {
+  color: var(--zx-success-text);
+}
+
+.zx-server-setup-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-3);
+  margin-top: var(--zx-space-2);
+}

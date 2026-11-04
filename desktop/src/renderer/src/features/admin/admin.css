@@ -1,0 +1,76 @@
+/*
+ * The administration: one row per person or company.
+ */
+
+.zx-admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zx-admin-row {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-bg-surface);
+}
+
+.zx-admin-row-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.zx-admin-row-text strong {
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-admin-row-text small {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-admin-select {
+  height: 28px;
+  padding: 0 var(--zx-space-2);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-sm);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-sm);
+  font-family: inherit;
+}
+
+.zx-admin-quota {
+  width: 96px;
+  height: 28px;
+  padding: 0 var(--zx-space-2);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-sm);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-sm);
+  font-family: inherit;
+}
+
+.zx-admin-state {
+  flex: none;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-admin-state[data-on='true'] {
+  color: var(--zx-success-text);
+}

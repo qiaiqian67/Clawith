@@ -1,0 +1,295 @@
+/*
+ * The one rail of the client.
+ *
+ * The rail shares the canvas with the page, and the page is a card that
+ * floats above it. One column of icons and one card is the whole shell.
+ */
+
+.zx-shell {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--zx-bg-frame);
+  color: var(--zx-text-primary);
+}
+
+/* The rail shares the canvas with the page: it is not a column of its own,
+ * only a column of icons above the same colour. */
+.zx-rail {
+  background: transparent;
+}
+
+.zx-rail {
+  display: flex;
+  width: 56px;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--zx-space-3) 0;
+}
+
+.zx-rail-top {
+  position: relative;
+  margin-bottom: var(--zx-space-4);
+}
+
+.zx-rail-org {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-text-primary);
+  color: var(--zx-bg-canvas);
+  font-size: 14px;
+  font-weight: var(--zx-weight-semibold);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.zx-rail-org-caret {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 13px;
+  height: 13px;
+  border: 1px solid var(--zx-border-strong);
+  border-radius: 4px;
+  background: var(--zx-bg-surface);
+}
+
+.zx-rail-org-caret::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 4px;
+  height: 4px;
+  border-right: 1.4px solid var(--zx-text-muted);
+  border-bottom: 1.4px solid var(--zx-text-muted);
+  transform: translateY(-1px) rotate(45deg);
+}
+
+.zx-rail-nav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--zx-space-1);
+}
+
+.zx-rail-item {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid transparent;
+  border-radius: var(--zx-radius-md);
+  background: transparent;
+  color: var(--zx-text-muted);
+  cursor: pointer;
+  transition: background-color var(--zx-duration-hover) ease, color var(--zx-duration-hover) ease;
+}
+
+.zx-rail-item:hover {
+  background: var(--zx-bg-control-hover);
+  color: var(--zx-text-secondary);
+}
+
+.zx-rail-item[data-active='true'] {
+  border-color: var(--zx-border-strong);
+  background: var(--zx-bg-surface);
+  color: var(--zx-text-primary);
+  box-shadow: var(--zx-shadow-raised);
+}
+
+.zx-rail-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-accent);
+}
+
+.zx-rail-foot {
+  position: relative;
+  margin-top: var(--zx-space-3);
+}
+
+.zx-rail-me {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--zx-border-strong);
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-bg-surface);
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.zx-rail-scrim {
+  position: fixed;
+  z-index: var(--zx-layer-overlay);
+  inset: 0;
+  border: 0;
+  background: transparent;
+  cursor: default;
+}
+
+.zx-rail-menu {
+  position: fixed;
+  z-index: var(--zx-layer-dialog);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 236px;
+  padding: var(--zx-space-2);
+  border: 1px solid var(--zx-border-strong);
+  border-radius: var(--zx-radius-lg);
+  background: var(--zx-bg-surface-raised);
+  box-shadow: var(--zx-shadow-overlay);
+}
+
+.zx-rail-menu-top {
+  top: 12px;
+  left: 64px;
+}
+
+.zx-rail-menu-foot {
+  bottom: 12px;
+  left: 64px;
+}
+
+.zx-rail-menu-label {
+  padding: var(--zx-space-1) var(--zx-space-2);
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-rail-menu-account {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+  padding: var(--zx-space-2);
+}
+
+.zx-rail-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+  width: 100%;
+  padding: var(--zx-space-2);
+  border: 0;
+  border-radius: var(--zx-radius-sm);
+  background: transparent;
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-md);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.zx-rail-menu-item:hover {
+  background: var(--zx-bg-control-hover);
+}
+
+.zx-rail-menu-item[data-active='true'] {
+  color: var(--zx-text-primary);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-rail-menu-plain {
+  padding-left: var(--zx-space-2);
+}
+
+.zx-rail-menu-mark {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: var(--zx-radius-sm);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-sm);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-rail-menu-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.zx-rail-menu-text strong {
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-rail-menu-text small {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-rail-menu-sep {
+  height: 1px;
+  margin: var(--zx-space-1) 0;
+  background: var(--zx-border);
+}
+
+.zx-rail-menu-version {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--zx-space-1) var(--zx-space-2);
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+/* The page: one card that floats above the canvas. The card carries the
+ * hairline and the shadow, so nothing inside it carries one of its own. */
+.zx-page {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  padding: 8px 8px 8px 6px;
+}
+
+.zx-page-card {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-card);
+  background: var(--zx-bg-surface);
+  box-shadow: var(--zx-shadow-raised);
+}
+
+/* A page of lists: the content is a centred column, so the eye reads it
+ * and the card does not look empty on a wide window. */
+.zx-content {
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 24px 32px;
+}
+
+@media (max-width: 1100px) {
+  .zx-content {
+    padding: 20px 24px;
+  }
+}

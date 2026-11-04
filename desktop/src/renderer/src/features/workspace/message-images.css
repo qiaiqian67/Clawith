@@ -1,0 +1,21 @@
+/*
+ * The images of a message.
+ */
+
+.zx-message-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--zx-space-2);
+  margin-bottom: var(--zx-space-2);
+}
+
+.zx-message-image {
+  display: block;
+  max-width: 220px;
+  max-height: 220px;
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  object-fit: cover;
+  cursor: zoom-in;
+  background: var(--zx-bg-canvas);
+}

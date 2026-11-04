@@ -1,0 +1,275 @@
+/*
+ * A page of the client.
+ *
+ * The page is a card that floats above the canvas. The content inside it is
+ * a centred column, so a wide window does not stretch a list of cards from
+ * one edge to the other.
+ */
+
+.zx-view {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--zx-bg-surface);
+  overflow-y: auto;
+}
+
+.zx-view-scroll {
+  width: 100%;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 24px 32px;
+}
+
+@media (max-width: 1100px) {
+  .zx-view-scroll {
+    padding: 20px 24px;
+  }
+}
+
+/* The head of a page: a title with a quiet second name, and a sentence. */
+.zx-view-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--zx-space-4);
+  padding: 20px 32px 0;
+}
+
+/* The head of a page that sits inside the centred column. */
+.zx-view-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--zx-space-4);
+  margin-bottom: 16px;
+}
+
+.zx-view-title {
+  margin: 0;
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-lg);
+  font-weight: var(--zx-weight-semibold);
+  letter-spacing: -0.01em;
+}
+
+.zx-view-title span {
+  color: var(--zx-text-dim);
+  font-weight: var(--zx-weight-regular);
+}
+
+.zx-view-subtitle {
+  margin: 2px 0 0;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-md);
+}
+
+.zx-view-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--zx-space-4);
+}
+
+.zx-view-empty {
+  margin: auto;
+  padding: 48px 24px;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-md);
+  text-align: center;
+}
+
+/* The tabs of a page, under the head. */
+.zx-page-tabs {
+  display: flex;
+  gap: var(--zx-space-6);
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--zx-border);
+}
+
+.zx-page-tab {
+  position: relative;
+  padding: 0 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.zx-page-tab:hover {
+  color: var(--zx-text-secondary);
+}
+
+.zx-page-tab[data-active='true'] {
+  color: var(--zx-text-primary);
+}
+
+.zx-page-tab[data-active='true']::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 2px;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-text-primary);
+}
+
+/* A card of the page: a hairline around a white sheet. */
+.zx-card {
+  overflow: hidden;
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-lg);
+  background: var(--zx-bg-surface);
+}
+
+.zx-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--zx-space-3);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--zx-border);
+}
+
+.zx-card-title {
+  margin: 0;
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-semibold);
+}
+
+.zx-card-note {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.zx-card-note:hover {
+  color: var(--zx-text-secondary);
+}
+
+/* A row of a card: a name, a note, and what is on the right. */
+.zx-row {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-3);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--zx-border);
+}
+
+.zx-row:last-child {
+  border-bottom: 0;
+}
+
+.zx-row:hover {
+  background: var(--zx-bg-control-hover);
+}
+
+.zx-row-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.zx-row-text strong {
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-row-text small {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A small mark that names the kind of a thing. */
+.zx-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-xs);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-muted);
+  font-size: 10px;
+  font-weight: var(--zx-weight-medium);
+  white-space: nowrap;
+}
+
+/* The round mark of a person or an assistant. */
+.zx-avatar {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-avatar[data-type='agent'] {
+  background: var(--zx-accent-soft);
+  color: var(--zx-accent-text);
+}
+
+/* The bar of a progress. */
+.zx-bar {
+  height: 3px;
+  overflow: hidden;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-bg-control);
+}
+
+.zx-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--zx-text-primary);
+}
+
+.zx-bar-fill[data-warn='true'] {
+  background: var(--zx-danger);
+}
+
+/* A filter of small pills. */
+.zx-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--zx-space-2);
+}
+
+.zx-filter {
+  padding: 2px 8px;
+  border: 0;
+  border-radius: var(--zx-radius-xs);
+  background: transparent;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.zx-filter:hover {
+  background: var(--zx-bg-control-hover);
+  color: var(--zx-text-secondary);
+}
+
+.zx-filter[data-active='true'] {
+  background: var(--zx-surface-light);
+  color: var(--zx-text-on-accent);
+}

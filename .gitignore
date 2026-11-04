@@ -3,7 +3,6 @@
 node_modules/
 dist/
 *.zip
-uv.lock
 .vite/
 *.log
 pnpm-lock.yaml
@@ -53,3 +52,17 @@ backend/tests/test_agent_api_live.py
 backend/app/scripts/toolathlon_benchmark.py
 backend/app/services/agent_runtime/benchmark/
 backend/tests/test_agent_runtime_benchmark.py
+
+# Desktop client build outputs
+desktop/out/
+desktop/dist/
+desktop/.vite/
+# The tools the packager downloads for itself (7zip, NSIS) are not source.
+desktop/.builder-cache/
+# The application icon is a source of the package, not a build output.
+!desktop/build/
+
+# Local run data: the database facts, the mail, the logs.
+.localdata/
+backend/.localdata/
+backend/.env.local.test

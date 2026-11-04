@@ -1,0 +1,81 @@
+/*
+ * The channels of one assistant.
+ */
+
+.zx-channels {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: var(--zx-space-6);
+}
+
+.zx-channels-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zx-channels-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--zx-space-2);
+  width: 100%;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: var(--zx-radius-sm);
+  background: transparent;
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-md);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.zx-channels-item:hover {
+  background: var(--zx-bg-control-hover);
+}
+
+.zx-channels-item[data-active='true'] {
+  background: var(--zx-bg-control-active);
+  color: var(--zx-text-primary);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-channels-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-channels-state {
+  flex: none;
+  color: var(--zx-text-dim);
+  font-size: 10px;
+}
+
+.zx-channels-state[data-on='true'] {
+  color: var(--zx-success-text);
+}
+
+.zx-channels-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-3);
+}
+
+.zx-channels-webhook {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-1);
+  padding: var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-bg-control);
+}
+
+.zx-channels-webhook-url {
+  overflow-wrap: anywhere;
+  color: var(--zx-text-secondary);
+  font-family: var(--zx-font-mono);
+  font-size: var(--zx-text-sm);
+}

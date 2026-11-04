@@ -1,0 +1,107 @@
+/*
+ * The Markdown of an assistant message.
+ *
+ * The type is the message type, so a long answer reads like a document and a
+ * short one stays compact.
+ */
+
+.zx-markdown {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-3);
+  min-width: 0;
+}
+
+.zx-md-paragraph {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.zx-md-heading {
+  margin: var(--zx-space-2) 0 0;
+  font-weight: var(--zx-weight-semibold);
+  letter-spacing: -0.01em;
+}
+
+.zx-md-heading:first-child {
+  margin-top: 0;
+}
+
+.zx-md-code {
+  margin: 0;
+  max-height: 420px;
+  overflow: auto;
+  padding: var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-bg-canvas);
+  color: var(--zx-text-secondary);
+  font-family: var(--zx-font-mono);
+  font-size: var(--zx-text-sm);
+  line-height: var(--zx-leading-sm);
+  white-space: pre;
+}
+
+.zx-md-list {
+  margin: 0;
+  padding-left: var(--zx-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-1);
+}
+
+.zx-md-list li {
+  word-break: break-word;
+}
+
+.zx-md-quote {
+  margin: 0;
+  padding-left: var(--zx-space-3);
+  border-left: 2px solid var(--zx-border-strong);
+  color: var(--zx-text-muted);
+}
+
+.zx-md-rule {
+  border: 0;
+  border-top: 1px solid var(--zx-border);
+  margin: var(--zx-space-2) 0;
+}
+
+.zx-md-table-wrap {
+  overflow-x: auto;
+}
+
+.zx-md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--zx-text-md);
+}
+
+.zx-md-table th,
+.zx-md-table td {
+  padding: var(--zx-space-2);
+  border: 1px solid var(--zx-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.zx-md-table th {
+  background: var(--zx-bg-control);
+  color: var(--zx-text-secondary);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-md-inline-code {
+  padding: 1px 4px;
+  border-radius: var(--zx-radius-xs);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-primary);
+  font-family: var(--zx-font-mono);
+  font-size: 0.92em;
+}
+
+.zx-md-link {
+  color: var(--zx-accent-text);
+  text-decoration: underline;
+}

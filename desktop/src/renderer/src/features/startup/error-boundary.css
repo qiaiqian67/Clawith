@@ -1,0 +1,58 @@
+/*
+ * The crash screen.
+ */
+
+.zx-error-screen {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  background: var(--zx-bg-canvas);
+  color: var(--zx-text-primary);
+}
+
+.zx-error-shell {
+  width: min(100%, 520px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--zx-space-3);
+  padding: 52px 24px;
+  text-align: center;
+}
+
+.zx-error-title {
+  margin: 0;
+  font-size: var(--zx-text-2xl);
+  font-weight: var(--zx-weight-semibold);
+}
+
+.zx-error-text {
+  margin: 0;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-md);
+  line-height: var(--zx-leading-md);
+}
+
+.zx-error-detail {
+  max-width: 100%;
+  max-height: 160px;
+  overflow: auto;
+  margin: 0;
+  padding: var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-bg-surface);
+  color: var(--zx-text-dim);
+  font-family: var(--zx-font-mono);
+  font-size: var(--zx-text-sm);
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.zx-error-actions {
+  display: flex;
+  gap: var(--zx-space-2);
+  margin-top: var(--zx-space-2);
+}

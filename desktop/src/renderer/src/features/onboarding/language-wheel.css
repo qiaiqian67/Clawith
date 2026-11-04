@@ -1,0 +1,149 @@
+/*
+ * The language wheel: a loop of languages with one in the centre.
+ *
+ * The row in the centre is full size and opaque. The rows above and below
+ * fade and shrink with their distance from the centre, so the wheel reads as
+ * a ring without any of it being interactive.
+ */
+
+.zx-wheel-screen {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  background: var(--zx-bg-canvas);
+  color: var(--zx-text-primary);
+}
+
+.zx-wheel-shell {
+  width: min(100%, 680px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 52px 24px;
+}
+
+.zx-wheel-lockup {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-4);
+  margin-bottom: 40px;
+}
+
+.zx-wheel-wordmark {
+  font-size: var(--zx-text-3xl);
+  font-weight: var(--zx-weight-semibold);
+  letter-spacing: -0.03em;
+}
+
+.zx-wheel-title {
+  margin: 0;
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+  color: var(--zx-text-secondary);
+}
+
+.zx-wheel-frame {
+  position: relative;
+  width: min(100%, 420px);
+  margin-top: var(--zx-space-6);
+}
+
+.zx-wheel {
+  position: relative;
+  height: 320px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, #000 26%, #000 74%, transparent);
+}
+
+.zx-wheel-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-2) var(--zx-space-4);
+  border: 0;
+  border-radius: var(--zx-radius-md);
+  background: transparent;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-xl);
+  font-weight: var(--zx-weight-medium);
+  line-height: var(--zx-leading-xl);
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translate(-50%, -50%) translateY(calc(var(--offset) * 46px))
+    scale(calc(1 - var(--distance) * 0.08));
+  opacity: calc(1 - var(--distance) * 0.26);
+  transition:
+    transform var(--zx-duration-normal) var(--zx-ease-out),
+    opacity var(--zx-duration-normal) var(--zx-ease-out),
+    color var(--zx-duration-normal) ease,
+    background-color var(--zx-duration-normal) ease;
+}
+
+.zx-wheel-item:hover {
+  color: var(--zx-text-secondary);
+}
+
+.zx-wheel-item[data-active='true'] {
+  background: var(--zx-bg-grouped);
+  color: var(--zx-text-primary);
+  font-weight: var(--zx-weight-semibold);
+  opacity: 1;
+}
+
+.zx-wheel-flag {
+  font-size: var(--zx-text-xl);
+  line-height: 1;
+}
+
+.zx-wheel-arrows {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + var(--zx-space-2));
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-1);
+  transform: translateY(-50%);
+}
+
+.zx-wheel-arrow {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 24px;
+  border: 0;
+  border-radius: var(--zx-radius-sm);
+  background: transparent;
+  color: var(--zx-text-dim);
+  cursor: pointer;
+  transition: color var(--zx-duration-hover) ease, background-color var(--zx-duration-hover) ease;
+}
+
+.zx-wheel-arrow:hover {
+  color: var(--zx-text-secondary);
+  background: var(--zx-bg-control-hover);
+}
+
+@media (max-width: 620px) {
+  .zx-wheel-shell {
+    padding: 48px 18px;
+  }
+
+  .zx-wheel {
+    height: 260px;
+  }
+
+  .zx-wheel-item {
+    font-size: var(--zx-text-lg);
+  }
+}
+
+.zx-wheel-name {
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+  color: var(--zx-text-secondary);
+}

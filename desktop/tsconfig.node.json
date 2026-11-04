@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "electron.vite.config.ts",
+    "src/main/**/*",
+    "src/preload/**/*",
+    "src/renderer/src/shared/**/*"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "types": ["node", "electron"],
+    "outDir": "out/tsc/node"
+  }
+}

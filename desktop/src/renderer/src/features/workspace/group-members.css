@@ -1,0 +1,207 @@
+/*
+ * The creation of a group, and the members of one.
+ */
+
+.zx-dialog-scrim {
+  position: fixed;
+  z-index: var(--zx-layer-dialog);
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--zx-dialog-overlay);
+  backdrop-filter: blur(2px);
+}
+
+.zx-dialog {
+  width: min(100%, 460px);
+  max-height: 80vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-6);
+  border: 1px solid var(--zx-border-strong);
+  border-radius: var(--zx-radius-xl);
+  background: var(--zx-bg-surface-raised);
+  box-shadow: var(--zx-shadow-overlay);
+}
+
+.zx-dialog-title {
+  margin: 0;
+  font-size: var(--zx-text-xl);
+  font-weight: var(--zx-weight-semibold);
+}
+
+.zx-dialog-error {
+  margin: 0;
+  color: var(--zx-danger-text);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--zx-space-2);
+}
+
+.zx-member-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+}
+
+.zx-member-empty {
+  margin: 0;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-member-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-1);
+  max-height: 240px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zx-member-choice {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+  width: 100%;
+  padding: var(--zx-space-1-5) var(--zx-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--zx-radius-sm);
+  background: transparent;
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-md);
+  text-align: left;
+  cursor: pointer;
+}
+
+.zx-member-choice:hover {
+  background: var(--zx-bg-control-hover);
+}
+
+.zx-member-choice[data-selected='true'] {
+  border-color: var(--zx-border-strong);
+  background: var(--zx-bg-control-active);
+  color: var(--zx-text-primary);
+}
+
+.zx-member-type {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border-radius: var(--zx-radius-xs);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-muted);
+  font-size: 10px;
+  font-weight: var(--zx-weight-semibold);
+}
+
+.zx-member-type[data-type='agent'] {
+  background: var(--zx-logo-production);
+  color: var(--zx-text-on-accent);
+}
+
+.zx-member-name,
+.zx-roster-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-roster {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+  padding: var(--zx-space-3) var(--zx-space-6);
+  border-bottom: 1px solid var(--zx-border);
+}
+
+.zx-roster-title {
+  margin: 0;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-roster-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--zx-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zx-roster-row {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+  max-width: 200px;
+  padding: var(--zx-space-1) var(--zx-space-2);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-bg-surface);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-roster-role {
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-roster-remove {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border: 0;
+  border-radius: var(--zx-radius-xs);
+  background: transparent;
+  color: var(--zx-text-dim);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.zx-roster-remove:hover:not(:disabled) {
+  background: var(--zx-bg-control-hover);
+  color: var(--zx-text-primary);
+}
+
+.zx-roster-add {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-1);
+}
+
+.zx-roster-candidates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--zx-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zx-roster-add-button {
+  padding: var(--zx-space-0-5) var(--zx-space-2);
+  border: 1px dashed var(--zx-border-strong);
+  border-radius: var(--zx-radius-pill);
+  background: transparent;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  cursor: pointer;
+}
+
+.zx-roster-add-button:hover:not(:disabled) {
+  border-color: var(--zx-text-dim);
+  color: var(--zx-text-secondary);
+}

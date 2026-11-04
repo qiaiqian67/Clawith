@@ -1,0 +1,96 @@
+/*
+ * The attachments of a message.
+ */
+
+.zx-attachments {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+  flex-wrap: wrap;
+}
+
+.zx-attachments-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--zx-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zx-attachment {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+  max-width: 260px;
+  padding: var(--zx-space-1) var(--zx-space-2);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-sm);
+  background: var(--zx-bg-surface);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-attachment-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--zx-text-secondary);
+}
+
+.zx-attachment-size {
+  flex: none;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-attachment-remove {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: var(--zx-radius-xs);
+  background: transparent;
+  color: var(--zx-text-dim);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.zx-attachment-remove:hover {
+  background: var(--zx-bg-control-hover);
+  color: var(--zx-text-primary);
+}
+
+.zx-attachments-error {
+  margin: 0;
+  color: var(--zx-danger-text);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-attachments-input {
+  display: none;
+}
+
+.zx-attachments-button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border: 0;
+  border-radius: var(--zx-radius-md);
+  background: transparent;
+  color: var(--zx-text-dim);
+  cursor: pointer;
+  transition: color var(--zx-duration-hover) ease, background-color var(--zx-duration-hover) ease;
+}
+
+.zx-attachments-button:hover:not(:disabled) {
+  background: var(--zx-bg-control-hover);
+  color: var(--zx-text-secondary);
+}
+
+.zx-attachments-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

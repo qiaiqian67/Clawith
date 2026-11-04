@@ -1,0 +1,172 @@
+/*
+ * Every --zx-* token of the ZeroX client is written here, once.
+ *
+ * The values are the ones of the openbot product, so the two clients look
+ * the same without a second owner of a value. The names keep the zx prefix
+ * of this client, so no component changes.
+ *
+ * The names mirror the structure a design system needs: a colour role, a text
+ * step, a space step, a radius, a duration, a layer. A value that is not here
+ * has nowhere to go.
+ */
+
+:root {
+  /* ── Surfaces ────────────────────────────────────────────────────────── */
+  --zx-accent: #007cf7;
+  --zx-accent-hover: #1f8fff;
+  --zx-accent-soft: rgba(0, 124, 247, 0.16);
+  --zx-accent-strong: rgba(0, 124, 247, 0.34);
+  --zx-accent-text: #42a0ff;
+  --zx-badge-new-soft: rgba(255, 30, 94, 0.16);
+  --zx-bg-canvas: #1a1a1a;
+  --zx-bg-canvas-clear: rgba(26, 26, 26, 0);
+  --zx-bg-control: #212121;
+  --zx-bg-control-active: #2a2a2a;
+  --zx-bg-control-hover: #242424;
+  --zx-bg-frame: #0d0d0d;
+  --zx-bg-glass: rgba(33, 33, 33, 0.76);
+  --zx-bg-grouped: #212121;
+  --zx-bg-native-canvas: #141414;
+  --zx-bg-native-sidebar: #141414;
+  --zx-bg-overlay: rgba(26, 26, 26, 0.92);
+  --zx-bg-sheet: #141414;
+  --zx-bg-surface: #212121;
+  --zx-bg-surface-raised: #242424;
+  --zx-border: rgba(255, 255, 255, 0.035);
+  --zx-border-chrome-glass: rgba(255, 255, 255, 0.08);
+  --zx-border-focus: var(--zx-text-muted);
+  --zx-border-grouped: #333335;
+  --zx-border-on-light: rgba(20, 20, 20, 0.14);
+  --zx-border-strong: rgba(255, 255, 255, 0.045);
+  --zx-control-lg: 36px;
+  --zx-control-md: 32px;
+  --zx-control-sm: 28px;
+  --zx-control-xl: 40px;
+  --zx-control-xs: 24px;
+  --zx-danger: #fd2f3b;
+  --zx-danger-border: rgba(253, 47, 59, 0.5);
+  --zx-danger-hover: #fd5d67;
+  --zx-danger-soft: rgba(253, 47, 59, 0.16);
+  --zx-danger-text: #ff6069;
+  --zx-duration-dialog: 100ms;
+  --zx-duration-fast: 120ms;
+  --zx-duration-hover: 0ms;
+  --zx-duration-normal: 160ms;
+  --zx-duration-overlay: 240ms;
+  --zx-duration-slow: 200ms;
+  --zx-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --zx-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --zx-focus-ring: 0 0 0 1px var(--zx-border-focus);
+  --zx-icon-lg: 20px;
+  --zx-icon-md: 16px;
+  --zx-icon-sm: 14px;
+  /* The overlay of a dialog sits above a page and below a menu. */
+  --zx-dialog-overlay: rgba(20, 20, 20, 0.12);
+  --zx-layer-overlay: 90;
+  --zx-icon-stroke: 1.5;
+  --zx-icon-xs: 12px;
+  --zx-leading-2xl: 24px;
+  --zx-leading-3xl: 30px;
+  --zx-leading-display: 38px;
+  --zx-leading-lg: 20px;
+  --zx-leading-md: 18px;
+  --zx-leading-sm: 16px;
+  --zx-leading-xl: 22px;
+  --zx-paper: #f0f0f0;
+  --zx-paper-border: rgba(20, 20, 20, 0.14);
+  --zx-paper-text: #141414;
+  --zx-paper-text-dim: rgba(20, 20, 20, 0.36);
+  --zx-paper-text-muted: rgba(20, 20, 20, 0.52);
+  --zx-radius-bubble: 22px;
+  --zx-radius-card: 14px;
+  --zx-radius-grouped: 16px;
+  --zx-radius-lg: 12px;
+  --zx-radius-logo: 20%;
+  --zx-radius-md: 8px;
+  --zx-radius-modal: 30px;
+  --zx-radius-pill: 999px;
+  --zx-radius-sm: 6px;
+  --zx-radius-xl: 20px;
+  --zx-radius-xs: 4px;
+  --zx-shadow-dialog: rgba(0, 0, 0, 0.48);
+  --zx-shadow-menu: rgba(0, 0, 0, 0.45);
+  --zx-shadow-overlay: 0 12px 32px rgba(0, 0, 0, 0.48);
+  --zx-shadow-popover-ambient: rgba(0, 0, 0, 0.1);
+  --zx-shadow-raised: 0 12px 32px var(--zx-shadow-popover-ambient);
+  --zx-space-0-5: 2px;
+  --zx-space-1: 4px;
+  --zx-space-1-5: 6px;
+  --zx-space-2: 8px;
+  --zx-space-3: 12px;
+  --zx-space-4: 16px;
+  --zx-space-6: 24px;
+  --zx-space-8: 32px;
+  --zx-success: #31cf76;
+  --zx-success-soft: rgba(49, 207, 118, 0.12);
+  --zx-success-text: #31cf76;
+  --zx-text-2xl: 18px;
+  --zx-text-3xl: 24px;
+  --zx-text-dim: #6a6a6a;
+  --zx-text-display: 32px;
+  --zx-text-grouped-secondary: #96969b;
+  --zx-text-lg: 14px;
+  --zx-text-md: 13px;
+  --zx-text-muted: #979797;
+  --zx-text-on-accent: #141414;
+  /* The text of a button on the accent. The accent is a mid blue, so the text is white. */
+  --zx-text-on-accent-fill: #ffffff;
+  --zx-surface-light: #f0f0f0;
+  --zx-text-on-status: #07130c;
+  --zx-text-placeholder: #bfbfbf;
+  --zx-text-primary: #ffffff;
+  --zx-text-readable: rgba(255, 255, 255, 0.52);
+  --zx-text-secondary: #dcdcdc;
+  --zx-text-sm: 12px;
+  --zx-text-xl: 16px;
+  --zx-tracking-tight: -0.1px;
+  --zx-tracking-wide: 0.02em;
+  --zx-warning: #ff9412;
+  --zx-warning-soft: rgba(255, 148, 18, 0.12);
+  --zx-warning-text: #ff9412;
+  --zx-weight-bold: 700;
+  --zx-weight-medium: 500;
+  --zx-weight-regular: 400;
+  --zx-weight-semibold: 600;
+  --zx-duration-toast-enter: 340ms;
+  --zx-duration-toast-exit: 220ms;
+  --zx-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+  --zx-font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --zx-icon-lg: 20px;
+  --zx-icon-md: 16px;
+  --zx-icon-sm: 14px;
+  --zx-icon-stroke: 1.5;
+  --zx-icon-xs: 12px;
+  --zx-layer-dialog: 100;
+  --zx-layer-dialog-host: 160;
+  --zx-layer-dropdown: 40;
+  --zx-layer-popover: 60;
+  --zx-layer-toast: 120;
+  --zx-layer-tooltip: 240;
+  --zx-loading-indicator-delay: 400ms;
+  --zx-logo-dev: #e3b866;
+  --zx-logo-eye: #040007;
+  --zx-logo-eye-x: 0%;
+  --zx-logo-eye-y: 0%;
+  --zx-mark-color: #7c5cff;
+  --zx-mark-delay: 80ms;
+  --zx-mark-offset: 0px;
+  --zx-mark-size: 18px;
+  --zx-splash-percent: 0%;
+  --zx-logo-preview: #61c985;
+  --zx-logo-production: #7c5cff;
+  --zx-logo-production-eye: #040007;
+  --zx-onboarding-desktop-blue: #7eb4f2;
+  --zx-onboarding-desktop-indigo: #6f7de8;
+  --zx-onboarding-desktop-mist: #dbe9ff;
+  --zx-onboarding-window: #f3f5f8;
+  --zx-question-option: #6bc7d9;
+  --zx-question-option-soft: rgba(107, 199, 217, 0.14);
+  --zx-text-hero: clamp(3rem, 8vw, 6.5rem);
+  --zx-unread-surface: #74b9ff;
+  --zx-unread-text: #07131f;
+}

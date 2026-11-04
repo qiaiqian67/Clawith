@@ -1,0 +1,100 @@
+appId: app.zerox.desktop
+productName: ZeroX
+copyright: Copyright © 2026 ZeroX
+protocols:
+  - name: ZeroX invitations
+    schemes:
+      - zerox
+asar: true
+artifactName: ${productName}-${version}-${arch}.${ext}
+electronUpdaterCompatibility: '>=2.16'
+electronFuses:
+  runAsNode: false
+  enableCookieEncryption: true
+  enableNodeOptionsEnvironmentVariable: false
+  enableNodeCliInspectArguments: false
+  enableEmbeddedAsarIntegrityValidation: true
+  onlyLoadAppFromAsar: true
+  loadBrowserProcessSpecificV8Snapshot: false
+  grantFileProtocolExtraPrivileges: false
+
+# The release feed of the client. Set ZEROX_UPDATE_URL before a package to make
+# the client check that address for a new build. Without it the client still
+# builds and installs; it just cannot update itself.
+publish:
+  provider: generic
+  url: ${env.ZEROX_UPDATE_URL}
+
+files:
+  - out/**/*
+  - package.json
+  - LICENSE
+extraResources:
+  - from: build/icon.png
+    to: icons/icon.png
+directories:
+  output: dist
+  buildResources: build
+
+mac:
+  category: public.app-category.productivity
+  minimumSystemVersion: '13.0'
+  hardenedRuntime: true
+  # The certificate of an Apple Developer account. Set CSC_LINK and
+  # CSC_KEY_PASSWORD to sign, and APPLE_ID, APPLE_APP_SPECIFIC_PASSWORD and
+  # APPLE_TEAM_ID to notarize. Without them the build is unsigned, and macOS
+  # refuses to open it without a manual override.
+  icon: build/icon.png
+  target:
+    - dmg
+    - zip
+  extendInfo:
+    NSMicrophoneUsageDescription: ZeroX records a voice message for the assistant.
+    NSScreenCaptureUsageDescription: ZeroX captures the screen so you can send a screenshot to the assistant.
+
+win:
+  # The ico is made once and kept, so a build never needs the icon tool and
+  # never reaches the network for it.
+  icon: build/icon.ico
+
+  target:
+    - target: nsis
+      arch:
+        - x64
+  # The certificate of a Windows code signing account. Set CSC_LINK and
+  # CSC_KEY_PASSWORD to sign. Without them Windows shows "Unknown publisher"
+  # and SmartScreen warns before the install.
+
+linux:
+  category: Development
+  icon: build/icon.png
+  synopsis: The ZeroX desktop client for the ZeroX multi-agent platform.
+  target:
+    - target: AppImage
+      arch:
+        - x64
+    - target: deb
+      arch:
+        - x64
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
+dmg:
+  title: ${productName} ${version}
+  iconSize: 128
+  window:
+    x: 400
+    y: 467
+    width: 680
+    height: 506
+  contents:
+    - x: 190
+      y: 220
+    - x: 490
+      y: 220
+      type: link
+      path: /Applications

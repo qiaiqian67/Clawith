@@ -1,0 +1,14 @@
+/*
+ * The market of skills.
+ */
+
+.zx-marketplace-search {
+  display: flex;
+  gap: var(--zx-space-2);
+  width: 320px;
+  flex: none;
+}
+
+.zx-marketplace-search .zx-field-input {
+  flex: 1;
+}

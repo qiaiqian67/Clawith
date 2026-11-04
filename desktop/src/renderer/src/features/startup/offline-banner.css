@@ -1,0 +1,39 @@
+/*
+ * The banner that says the server cannot be reached.
+ */
+
+.zx-offline-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-2) var(--zx-space-4);
+  border-bottom: 1px solid var(--zx-border);
+  background: var(--zx-warning-soft);
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+}
+
+.zx-offline-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-offline-button {
+  flex: none;
+  height: 26px;
+  padding: 0 var(--zx-space-3);
+  border: 1px solid var(--zx-border-strong);
+  border-radius: var(--zx-radius-sm);
+  background: transparent;
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-sm);
+  cursor: pointer;
+}
+
+.zx-offline-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

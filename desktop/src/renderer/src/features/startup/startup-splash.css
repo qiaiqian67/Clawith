@@ -1,0 +1,79 @@
+/*
+ * The splash that covers the client while it opens.
+ */
+
+.zx-splash {
+  position: absolute;
+  z-index: var(--zx-layer-dialog);
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--zx-bg-canvas);
+  opacity: 1;
+  transition: opacity var(--zx-duration-overlay) var(--zx-ease-out);
+}
+
+.zx-splash[data-ready='true'] {
+  opacity: 0;
+}
+
+.zx-splash-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.zx-splash-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.zx-splash-scribble {
+  display: block;
+  width: 112px;
+  height: 14px;
+  overflow: visible;
+}
+
+.zx-splash-scribble polyline {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.4px;
+}
+
+.zx-splash-track {
+  stroke: color-mix(in srgb, var(--zx-logo-production) 18%, transparent);
+}
+
+.zx-splash-fill {
+  stroke: var(--zx-logo-production);
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: calc(1 - var(--zx-splash-percent));
+  transition: stroke-dashoffset var(--zx-duration-overlay) var(--zx-ease-out);
+}
+
+.zx-splash-progress[data-known='false'] .zx-splash-fill {
+  stroke-dasharray: 0.35 1.2;
+  transition: none;
+  animation: zx-splash-scribble 1.8s var(--zx-ease-in-out) infinite;
+}
+
+.zx-splash-label {
+  margin: 0;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-md);
+}
+
+@keyframes zx-splash-scribble {
+  from {
+    stroke-dashoffset: 0.35;
+  }
+  to {
+    stroke-dashoffset: -1.2;
+  }
+}

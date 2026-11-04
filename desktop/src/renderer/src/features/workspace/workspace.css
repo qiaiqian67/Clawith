@@ -1,0 +1,480 @@
+/*
+ * The main workspace: the rail, the sidebar, and the pane in the middle.
+ */
+
+
+.zx-sidebar {
+  display: flex;
+  width: 264px;
+  flex: none;
+  flex-direction: column;
+  min-height: 0;
+  border-right: 1px solid var(--zx-border);
+  background: transparent;
+}
+
+.zx-sidebar-search-wrap {
+  flex: none;
+  padding: 12px 10px 8px;
+}
+
+/* The search field: a soft pill with a magnifier. */
+.zx-sidebar-search-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-bg-surface);
+  color: var(--zx-text-dim);
+}
+
+.zx-sidebar-search-field:focus-within {
+  border-color: var(--zx-border-strong);
+}
+
+.zx-sidebar-search {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+  font-family: inherit;
+  outline: none;
+}
+
+.zx-sidebar-search::placeholder {
+  color: var(--zx-text-dim);
+}
+
+.zx-sidebar-search::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* The foot of the list: how many assistants are working. */
+.zx-sidebar-foot {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-top: 1px solid var(--zx-border);
+}
+
+.zx-sidebar-foot-dot {
+  width: 4px;
+  height: 4px;
+  flex: none;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-success);
+}
+
+.zx-sidebar-foot-text {
+  color: var(--zx-text-dim);
+  font-size: 10px;
+}
+
+.zx-sidebar-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 var(--zx-space-2) var(--zx-space-3);
+}
+
+.zx-sidebar-create,
+.zx-sidebar-agent {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+  width: 100%;
+  padding: var(--zx-space-2);
+  border: 0;
+  border-radius: var(--zx-radius-md);
+  background: transparent;
+  color: var(--zx-text-secondary);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--zx-duration-hover) ease;
+}
+
+.zx-sidebar-create:hover,
+.zx-sidebar-agent:hover {
+  background: var(--zx-bg-control-hover);
+}
+
+.zx-sidebar-agent[data-active='true'] {
+  background: var(--zx-bg-control);
+  color: var(--zx-text-primary);
+}
+
+.zx-sidebar-create-mark {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: var(--zx-radius-logo);
+  background: var(--zx-danger);
+}
+
+.zx-sidebar-avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-sidebar-agent-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.zx-sidebar-agent-text strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-sidebar-agent-text small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-sidebar-status {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-success);
+}
+
+.zx-pane {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--zx-bg-surface);
+  overflow: hidden;
+}
+
+.zx-agent-setup {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--zx-space-8);
+  width: 100%;
+  height: 100%;
+  padding: var(--zx-space-8);
+  overflow-y: auto;
+}
+
+.zx-agent-setup-editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-4);
+  max-width: 420px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.zx-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+}
+
+.zx-field-label {
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-sm);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-field-label em {
+  color: var(--zx-danger);
+  font-style: normal;
+}
+
+.zx-field-input,
+.zx-field-textarea {
+  width: 100%;
+  padding: var(--zx-space-2) var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-bg-surface);
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+  outline: none;
+  resize: none;
+}
+
+.zx-field-input:focus,
+.zx-field-textarea:focus {
+  border-color: var(--zx-text-muted);
+}
+
+.zx-field-textarea {
+  min-height: 72px;
+}
+
+.zx-field-error {
+  margin: 0;
+  color: var(--zx-danger-text);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-agent-setup-actions {
+  display: flex;
+  gap: var(--zx-space-2);
+  justify-content: flex-end;
+}
+
+.zx-button-primary,
+.zx-button-ghost {
+  height: 36px;
+  padding: 0 var(--zx-space-4);
+  border: 0;
+  border-radius: var(--zx-radius-md);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+  cursor: pointer;
+  transition: opacity var(--zx-duration-hover) ease, background-color var(--zx-duration-hover) ease;
+}
+
+.zx-button-primary {
+  background: var(--zx-surface-light);
+  color: var(--zx-text-on-accent);
+}
+
+.zx-button-ghost {
+  background: var(--zx-bg-control);
+  color: var(--zx-text-secondary);
+}
+
+.zx-button-primary:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.zx-agent-setup-suggestions {
+  max-width: 420px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.zx-agent-setup-suggestions h2 {
+  margin: 0 0 var(--zx-space-3);
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-agent-setup-suggestion-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+}
+
+.zx-agent-setup-suggestion {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-card);
+  background: var(--zx-bg-surface);
+  color: var(--zx-text-secondary);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--zx-duration-hover) ease, border-color var(--zx-duration-hover) ease;
+}
+
+.zx-agent-setup-suggestion:hover {
+  background: var(--zx-bg-surface-raised);
+  border-color: var(--zx-border-strong);
+}
+
+.zx-agent-setup-suggestion-mark {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: var(--zx-radius-logo);
+  background: var(--zx-logo-production);
+}
+
+.zx-agent-setup-suggestion strong {
+  display: block;
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-agent-setup-suggestion small {
+  display: block;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-sidebar-sessions {
+  margin-top: var(--zx-space-4);
+  padding-top: var(--zx-space-3);
+  border-top: 1px solid var(--zx-border);
+}
+
+.zx-sidebar-sessions-title {
+  margin: 0 0 var(--zx-space-2);
+  padding: 0 var(--zx-space-2);
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-sidebar-session {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--zx-space-2);
+  width: 100%;
+  padding: var(--zx-space-1-5) var(--zx-space-2);
+  border: 0;
+  border-radius: var(--zx-radius-sm);
+  background: transparent;
+  color: var(--zx-text-muted);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--zx-duration-hover) ease, color var(--zx-duration-hover) ease;
+}
+
+.zx-sidebar-session:hover {
+  background: var(--zx-bg-control-hover);
+  color: var(--zx-text-secondary);
+}
+
+.zx-sidebar-session[data-active='true'] {
+  background: var(--zx-bg-control-active);
+  color: var(--zx-text-primary);
+}
+
+.zx-sidebar-session-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--zx-text-md);
+}
+
+.zx-sidebar-session-unread {
+  display: grid;
+  place-items: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-unread-surface);
+  color: var(--zx-unread-text);
+  font-size: 10px;
+  font-weight: var(--zx-weight-semibold);
+  line-height: 1;
+}
+
+.zx-sidebar-new-session {
+  display: block;
+  width: 100%;
+  margin-bottom: var(--zx-space-2);
+  padding: var(--zx-space-1-5) var(--zx-space-2);
+  border: 1px dashed var(--zx-border-strong);
+  border-radius: var(--zx-radius-sm);
+  background: transparent;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--zx-duration-hover) ease, border-color var(--zx-duration-hover) ease;
+}
+
+.zx-sidebar-new-session:hover {
+  border-color: var(--zx-text-dim);
+  color: var(--zx-text-secondary);
+}
+
+.zx-sidebar-session-error {
+  margin: var(--zx-space-2) 0 0;
+  padding: 0 var(--zx-space-2);
+  color: var(--zx-danger-text);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-sidebar-avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+/* The agent form: a title, the fields, and the templates on the right. */
+.zx-agent-setup-title {
+  margin: 0 0 var(--zx-space-4);
+  font-size: var(--zx-text-xl);
+  font-weight: var(--zx-weight-semibold);
+  letter-spacing: -0.01em;
+}
+
+.zx-agent-setup-missing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+  padding: var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-bg-control);
+}
+
+.zx-agent-setup-missing p {
+  margin: 0;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-md);
+}
+
+.zx-agent-setup-category {
+  margin-bottom: var(--zx-space-4);
+}
+
+.zx-agent-setup-category-name {
+  display: block;
+  margin-bottom: var(--zx-space-2);
+  color: var(--zx-text-dim);
+  font-size: 10px;
+  font-weight: var(--zx-weight-medium);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.zx-agent-setup-suggestion-icon {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: var(--zx-radius-sm);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-agent-setup-suggestion-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}

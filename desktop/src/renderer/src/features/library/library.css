@@ -1,0 +1,81 @@
+/*
+ * The library of the organization.
+ */
+
+.zx-library-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--zx-border);
+}
+
+.zx-library-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zx-library-entry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+  padding: var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-lg);
+  background: var(--zx-bg-surface);
+}
+
+.zx-library-entry-head {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+}
+
+.zx-library-entry-title {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-lg);
+  font-weight: var(--zx-weight-medium);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.zx-library-entry-title:hover {
+  color: var(--zx-text-secondary);
+}
+
+.zx-library-entry-origin {
+  flex: none;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-library-entry-actions {
+  display: flex;
+  flex: none;
+  gap: var(--zx-space-1);
+}
+
+.zx-library-entry-applicability {
+  margin: 0;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-md);
+}
+
+.zx-library-entry-body {
+  padding-top: var(--zx-space-2);
+  border-top: 1px solid var(--zx-border);
+}
+
+.zx-library-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--zx-space-1);
+}

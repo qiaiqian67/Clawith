@@ -1,0 +1,204 @@
+/*
+ * The sign-in screen: the brand lockup, the field, and the one action.
+ */
+
+.zx-login-screen {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  background: var(--zx-bg-canvas);
+  color: var(--zx-text-primary);
+}
+
+.zx-login-shell {
+  width: min(100%, 420px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 52px 24px;
+}
+
+.zx-login-lockup {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-4);
+  margin-bottom: 36px;
+}
+
+.zx-login-wordmark {
+  font-size: var(--zx-text-3xl);
+  font-weight: var(--zx-weight-semibold);
+  letter-spacing: -0.03em;
+}
+
+.zx-login-title {
+  margin: 0;
+  font-size: var(--zx-text-xl);
+  font-weight: var(--zx-weight-semibold);
+  text-align: center;
+}
+
+.zx-login-subtitle {
+  margin: var(--zx-space-2) 0 0;
+  max-width: 340px;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  line-height: var(--zx-leading-sm);
+  text-align: center;
+}
+
+.zx-login-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+  margin-top: var(--zx-space-6);
+}
+
+.zx-login-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-bg-surface);
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-lg);
+  outline: none;
+  transition: border-color var(--zx-duration-normal) ease;
+}
+
+.zx-login-input::placeholder {
+  color: var(--zx-text-placeholder);
+}
+
+.zx-login-input:focus {
+  border-color: var(--zx-text-muted);
+}
+
+.zx-login-action {
+  width: 100%;
+  height: 40px;
+  margin-top: var(--zx-space-3);
+  border: 0;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-surface-light);
+  color: var(--zx-text-on-accent);
+  font-size: var(--zx-text-lg);
+  font-weight: var(--zx-weight-medium);
+  cursor: pointer;
+  transition: opacity var(--zx-duration-hover) ease;
+}
+
+.zx-login-action:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.zx-login-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--zx-space-3);
+  width: 100%;
+  margin-top: var(--zx-space-4);
+}
+
+/* The row holds two plain actions, so the buttons carry the look and not
+ * the row. A row with the look of a button reads as one wide button. */
+.zx-login-secondary > button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  font-family: inherit;
+  cursor: pointer;
+  transition: color var(--zx-duration-hover) ease;
+}
+
+.zx-login-secondary > button:hover:not(:disabled) {
+  color: var(--zx-text-secondary);
+}
+
+.zx-login-secondary > button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.zx-login-note {
+  margin: var(--zx-space-6) 0 0;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  line-height: var(--zx-leading-sm);
+  text-align: center;
+}
+
+.zx-login-error {
+  margin: var(--zx-space-3) 0 0;
+  color: var(--zx-danger-text);
+  font-size: var(--zx-text-sm);
+  text-align: center;
+}
+
+.zx-login-link {
+  border: 0;
+  background: transparent;
+  color: var(--zx-accent-text);
+  font-size: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.zx-login-otp {
+  width: 100%;
+  margin-top: var(--zx-space-6);
+}
+
+.zx-login-skip {
+  margin-top: var(--zx-space-4);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  font-family: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.zx-login-skip:hover {
+  color: var(--zx-text-muted);
+}
+
+/* The hint of a field, under the field it explains. */
+.zx-login-hint {
+  margin: 0;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  line-height: var(--zx-leading-sm);
+}
+
+/* The one action of the account form, in the shape of the sign-in action. */
+.zx-login-submit {
+  width: 100%;
+  height: 40px;
+  margin-top: var(--zx-space-6);
+  border: 0;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-text-primary);
+  color: var(--zx-text-on-accent);
+  font-size: var(--zx-text-lg);
+  font-weight: var(--zx-weight-medium);
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity var(--zx-duration-hover) ease;
+}
+
+.zx-login-submit:disabled {
+  opacity: 0.45;
+  cursor: default;
+}

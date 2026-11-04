@@ -1,0 +1,243 @@
+/*
+ * The workbench: a greeting, four numbers, and a table.
+ */
+
+.zx-workbench-head {
+  margin-bottom: 24px;
+}
+
+.zx-workbench-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--zx-text-primary);
+  font-size: 19px;
+  font-weight: var(--zx-weight-semibold);
+  letter-spacing: -0.01em;
+}
+
+.zx-workbench-title span {
+  font-size: 17px;
+}
+
+.zx-workbench-sub {
+  margin: 4px 0 0;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-workbench-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.zx-workbench-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-lg);
+  background: var(--zx-bg-surface);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--zx-duration-hover) ease;
+}
+
+.zx-workbench-card:hover {
+  border-color: var(--zx-border-strong);
+}
+
+.zx-workbench-card-label {
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-workbench-card-value {
+  color: var(--zx-text-primary);
+  font-size: 22px;
+  font-weight: var(--zx-weight-semibold);
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.zx-workbench-card-sub {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+/* The table of the staff. */
+.zx-workbench-table {
+  margin-bottom: 24px;
+}
+
+.zx-workbench-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.zx-workbench-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) 150px 96px;
+  align-items: center;
+  gap: var(--zx-space-4);
+  width: 100%;
+  padding: 10px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--zx-border);
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.zx-workbench-row:last-child {
+  border-bottom: 0;
+}
+
+.zx-workbench-row:hover {
+  background: var(--zx-bg-control-hover);
+}
+
+.zx-workbench-staff {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.zx-workbench-staff-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.zx-workbench-staff-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-workbench-staff-role {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-workbench-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--zx-text-dim);
+  font-size: 10px;
+  font-weight: var(--zx-weight-regular);
+}
+
+.zx-workbench-state::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-text-dim);
+}
+
+.zx-workbench-state[data-state='running'] {
+  color: var(--zx-success-text);
+}
+
+.zx-workbench-state[data-state='running']::before {
+  background: var(--zx-success);
+}
+
+.zx-workbench-usage {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.zx-workbench-usage-value {
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.zx-workbench-usage-limit {
+  color: var(--zx-text-dim);
+}
+
+.zx-workbench-usage-bar {
+  display: block;
+  width: 48px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-bg-control);
+}
+
+.zx-workbench-usage-note {
+  color: var(--zx-text-dim);
+  font-size: 10px;
+}
+
+.zx-workbench-activity {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The activity below the table. */
+.zx-workbench-activity {
+  margin-bottom: 24px;
+}
+
+.zx-workbench-activity-row {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-3);
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--zx-border);
+}
+
+.zx-workbench-activity-row:last-child {
+  border-bottom: 0;
+}
+
+.zx-workbench-activity-row:hover {
+  background: var(--zx-bg-control-hover);
+}
+
+.zx-workbench-activity-time {
+  width: 40px;
+  flex: none;
+  color: var(--zx-text-dim);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.zx-workbench-activity-text {
+  flex: 1;
+  min-width: 0;
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-md);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-workbench-foot {
+  padding: 24px 0;
+  color: var(--zx-text-dim);
+  font-size: 10px;
+  text-align: center;
+}

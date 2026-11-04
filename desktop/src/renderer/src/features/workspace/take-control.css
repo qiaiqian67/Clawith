@@ -1,0 +1,71 @@
+/*
+ * Taking over the screen of an assistant.
+ */
+
+.zx-take-control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-3);
+}
+
+.zx-take-control-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+}
+
+.zx-take-control-url {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  font-family: var(--zx-font-mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-take-control-state {
+  flex: none;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-take-control-state[data-locked='true'] {
+  color: var(--zx-accent-text);
+}
+
+.zx-take-control-frame {
+  display: grid;
+  place-items: center;
+  min-height: 260px;
+  padding: var(--zx-space-2);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-lg);
+  background: var(--zx-bg-control);
+}
+
+.zx-take-control-frame[data-locked='true'] {
+  cursor: crosshair;
+}
+
+.zx-take-control-image {
+  max-width: 100%;
+  max-height: 420px;
+  border-radius: var(--zx-radius-sm);
+}
+
+.zx-take-control-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+}
+
+.zx-take-control-actions .zx-field-input {
+  flex: 1;
+}
+
+.zx-take-control-keys {
+  display: flex;
+  gap: var(--zx-space-1);
+}

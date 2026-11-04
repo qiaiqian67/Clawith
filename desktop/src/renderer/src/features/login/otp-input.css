@@ -1,0 +1,100 @@
+/*
+ * The one-time code entry.
+ *
+ * The native input sits over the slots with no size of its own, so the
+ * platform keyboard and autofill reach the input while the slots draw the
+ * characters.
+ */
+
+.zx-otp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--zx-space-3);
+}
+
+.zx-otp-fieldset {
+  position: relative;
+  display: flex;
+  gap: var(--zx-space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.zx-otp-native {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  opacity: 0;
+}
+
+.zx-otp-slots {
+  display: flex;
+  gap: var(--zx-space-2);
+}
+
+.zx-otp-slot {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 48px;
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-bg-surface);
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-2xl);
+  font-weight: var(--zx-weight-medium);
+  line-height: var(--zx-leading-2xl);
+  transition:
+    border-color var(--zx-duration-normal) ease,
+    background-color var(--zx-duration-normal) ease;
+}
+
+.zx-otp-slot[data-active='true'] {
+  border-color: var(--zx-text-muted);
+  background: var(--zx-bg-surface-raised);
+}
+
+.zx-otp-slot[data-filled='true'] {
+  border-color: var(--zx-border-strong);
+}
+
+.zx-otp-caret {
+  width: 2px;
+  height: 22px;
+  background: var(--zx-text-primary);
+  animation: zx-otp-blink 1.1s steps(2, start) infinite;
+}
+
+.zx-otp[data-status='error'] .zx-otp-slot {
+  border-color: var(--zx-danger-border);
+}
+
+.zx-otp[data-status='success'] .zx-otp-slot {
+  border-color: var(--zx-success);
+}
+
+.zx-otp-message {
+  margin: 0;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  line-height: var(--zx-leading-sm);
+  text-align: center;
+}
+
+.zx-otp[data-status='error'] .zx-otp-message {
+  color: var(--zx-danger-text);
+}
+
+@keyframes zx-otp-blink {
+  to {
+    visibility: hidden;
+  }
+}

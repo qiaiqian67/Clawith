@@ -1,0 +1,167 @@
+/*
+ * The OKR: objectives over key results.
+ */
+
+.zx-okr-period {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.zx-okr-composer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-4);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-lg);
+  background: var(--zx-bg-surface);
+}
+
+.zx-okr-composer-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--zx-space-3);
+}
+
+.zx-okr-composer-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.zx-okr-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zx-okr-objective {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+  padding: var(--zx-space-4);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-lg);
+  background: var(--zx-bg-surface);
+}
+
+.zx-okr-objective-head {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-3);
+}
+
+.zx-okr-objective-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.zx-okr-objective-text strong {
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-lg);
+  font-weight: var(--zx-weight-semibold);
+}
+
+.zx-okr-objective-text small {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-okr-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-2);
+  flex: none;
+}
+
+.zx-okr-progress-bar {
+  display: block;
+  width: 120px;
+  height: 6px;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-bg-control);
+  overflow: hidden;
+}
+
+.zx-okr-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--zx-accent);
+}
+
+.zx-okr-progress-value {
+  min-width: 36px;
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.zx-okr-description {
+  margin: 0;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-md);
+}
+
+.zx-okr-key-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zx-okr-key-results li {
+  display: grid;
+  grid-template-columns: 1fr auto 120px auto;
+  align-items: center;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-2) 0;
+  border-top: 1px solid var(--zx-border);
+}
+
+.zx-okr-key-title {
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-md);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-okr-key-value {
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.zx-okr-key-bar {
+  display: block;
+  height: 4px;
+  border-radius: var(--zx-radius-pill);
+  background: var(--zx-bg-control);
+  overflow: hidden;
+}
+
+.zx-okr-bump {
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-sm);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-md);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.zx-okr-bump:hover {
+  border-color: var(--zx-border-strong);
+  color: var(--zx-text-primary);
+}

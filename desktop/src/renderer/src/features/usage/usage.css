@@ -1,0 +1,85 @@
+/*
+ * The quota of the organization.
+ */
+
+.zx-usage-row {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-3);
+}
+
+.zx-usage-ring {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  transform: rotate(-90deg);
+}
+
+.zx-usage-track {
+  stroke: currentcolor;
+  opacity: 0.15;
+}
+
+.zx-usage-arc {
+  stroke: var(--zx-success);
+}
+
+.zx-usage-arc[data-tone='warning'] {
+  stroke: var(--zx-warning);
+}
+
+.zx-usage-arc[data-tone='critical'] {
+  stroke: var(--zx-danger);
+}
+
+.zx-usage-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.zx-usage-text strong {
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-usage-text small {
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-usage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--zx-space-2);
+  margin-top: var(--zx-space-3);
+}
+
+.zx-usage-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: var(--zx-space-2);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-bg-control);
+}
+
+.zx-usage-cell strong {
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-lg);
+  font-weight: var(--zx-weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.zx-usage-cell small {
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-usage-current {
+  flex: none;
+  color: var(--zx-success-text);
+  font-size: var(--zx-text-sm);
+}

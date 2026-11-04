@@ -1,0 +1,121 @@
+/*
+ * The notices of the user.
+ */
+
+.zx-page-tabs {
+  display: flex;
+  gap: var(--zx-space-1);
+  padding: 0 var(--zx-space-6);
+  border-bottom: 1px solid var(--zx-border);
+}
+
+.zx-page-tab {
+  padding: var(--zx-space-2) var(--zx-space-3);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-md);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.zx-page-tab[data-active='true'] {
+  border-bottom-color: var(--zx-text-primary);
+  color: var(--zx-text-primary);
+}
+
+.zx-messages-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--zx-space-2);
+}
+
+.zx-messages-filter {
+  padding: 2px var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-pill);
+  background: transparent;
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.zx-messages-filter[data-active='true'] {
+  border-color: var(--zx-text-primary);
+  background: var(--zx-bg-control);
+  color: var(--zx-text-primary);
+}
+
+.zx-notice-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zx-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zx-notice {
+  display: flex;
+  align-items: center;
+  gap: var(--zx-space-3);
+  width: 100%;
+  padding: var(--zx-space-3);
+  border: 1px solid var(--zx-border);
+  border-radius: var(--zx-radius-md);
+  background: var(--zx-bg-surface);
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.zx-notice-static {
+  cursor: default;
+}
+
+.zx-notice[data-unread='true'] {
+  border-color: var(--zx-border-strong);
+  background: var(--zx-bg-surface-raised);
+}
+
+.zx-notice-dot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: var(--zx-radius-pill);
+  background: transparent;
+}
+
+.zx-notice[data-unread='true'] .zx-notice-dot {
+  background: var(--zx-accent);
+}
+
+.zx-notice-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.zx-notice-text strong {
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+  font-weight: var(--zx-weight-medium);
+}
+
+.zx-notice-text small {
+  color: var(--zx-text-muted);
+  font-size: var(--zx-text-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-notice-time {
+  flex: none;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}

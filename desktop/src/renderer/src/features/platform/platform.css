@@ -1,0 +1,29 @@
+/*
+ * The platform, as an administrator sees it.
+ */
+
+.zx-platform-rank {
+  width: 20px;
+  flex: none;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.zx-platform-tokens {
+  flex: none;
+  color: var(--zx-text-secondary);
+  font-size: var(--zx-text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.zx-platform-state {
+  flex: none;
+  color: var(--zx-text-dim);
+  font-size: var(--zx-text-sm);
+}
+
+.zx-platform-state[data-on='true'] {
+  color: var(--zx-success-text);
+}

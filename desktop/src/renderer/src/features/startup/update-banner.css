@@ -1,0 +1,39 @@
+/*
+ * The banner of a new release.
+ */
+
+.zx-update-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--zx-space-3);
+  padding: var(--zx-space-2) var(--zx-space-4);
+  border-bottom: 1px solid var(--zx-border);
+  background: var(--zx-accent-soft);
+  color: var(--zx-text-primary);
+  font-size: var(--zx-text-md);
+}
+
+.zx-update-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zx-update-button {
+  flex: none;
+  height: 26px;
+  padding: 0 var(--zx-space-3);
+  border: 0;
+  border-radius: var(--zx-radius-sm);
+  background: var(--zx-accent);
+  color: var(--zx-text-on-accent-fill);
+  font-size: var(--zx-text-sm);
+  cursor: pointer;
+}
+
+.zx-update-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

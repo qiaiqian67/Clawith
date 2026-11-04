@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": ["src/renderer/src/**/*", "src/renderer/src/**/*.tsx"],
+  "compilerOptions": {
+    "composite": true,
+    "types": ["node"],
+    "outDir": "out/tsc/web"
+  }
+}
