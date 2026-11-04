@@ -17,6 +17,30 @@ from app.services.sandbox.local.subprocess_backend import (
 )
 
 
+def _patch_process_group(monkeypatch, *, terminated) -> None:
+    """Make the process-group calls work on every platform.
+
+    Windows has no process group, so the backend signals the process itself.
+    The test then watches that path instead of the POSIX one.
+    """
+    if hasattr(subprocess_backend.os, "killpg") and hasattr(subprocess_backend.os, "getpgid"):
+        monkeypatch.setattr(subprocess_backend.os, "getpgid", lambda pid: pid)
+        monkeypatch.setattr(
+            subprocess_backend.os,
+            "killpg",
+            lambda pid, sig: terminated.append((pid, sig)),
+        )
+        return
+
+    # The Windows path signals the process itself. The caller watches a list
+    # of pids there, and a list of pairs on the POSIX path.
+    monkeypatch.setattr(
+        subprocess_backend.os,
+        "kill",
+        lambda pid, sig: terminated.append(pid),
+    )
+
+
 @pytest.mark.asyncio
 async def test_workspace_venv_uses_async_subprocess(monkeypatch, tmp_path: Path) -> None:
     venv_path = tmp_path / ".venv"
@@ -68,12 +92,7 @@ async def test_workspace_venv_timeout_terminates_child(monkeypatch, tmp_path: Pa
 
     monkeypatch.setattr(asyncio, "create_subprocess_exec", fake_create)
     monkeypatch.setattr(subprocess_backend, "VENV_CREATION_TIMEOUT_SECONDS", 0.01)
-    monkeypatch.setattr(subprocess_backend.os, "getpgid", lambda pid: pid)
-    monkeypatch.setattr(
-        subprocess_backend.os,
-        "killpg",
-        lambda pid, _signal: terminated.append(pid),
-    )
+    _patch_process_group(monkeypatch, terminated=terminated)
     backend = SubprocessBackend(SandboxConfig())
 
     with pytest.raises(RuntimeError, match="Timed out"):
@@ -102,17 +121,17 @@ async def test_terminate_and_reap_process_waits_after_group_termination(monkeypa
             self.returncode = -signal.SIGKILL
 
     proc = _Process()
-    monkeypatch.setattr(subprocess_backend.os, "getpgid", lambda pid: pid)
-    monkeypatch.setattr(
-        subprocess_backend.os,
-        "killpg",
-        lambda pid, sig: terminated.append((pid, sig)),
-    )
+    _patch_process_group(monkeypatch, terminated=terminated)
 
     backend = SubprocessBackend(SandboxConfig())
     await backend._terminate_and_reap_process(proc)  # type: ignore[arg-type]
 
-    assert terminated == [(789, signal.SIGTERM)]
+    # The POSIX path records a pid and a signal; the Windows path records the
+    # pid only.
+    if hasattr(subprocess_backend.os, "killpg"):
+        assert terminated == [(789, signal.SIGTERM)]
+    else:
+        assert terminated == [789]
     assert proc.wait_calls == 1
 
 

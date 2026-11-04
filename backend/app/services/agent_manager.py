@@ -215,7 +215,13 @@ class AgentManager:
         hb_key = f"{agent_prefix}/HEARTBEAT.md"
         if not await storage.exists(hb_key):
             hb_template = Path(__file__).parent.parent / "templates" / "HEARTBEAT.md"
-            hb_content = hb_template.read_text(encoding="utf-8") if hb_template.exists() else "# Heartbeat Instructions\n"
+            # The newline of the file is normalized, so the same template
+            # reaches storage on every platform.
+            hb_content = (
+                hb_template.read_text(encoding="utf-8").replace("\r\n", "\n")
+                if hb_template.exists()
+                else "# Heartbeat Instructions\n"
+            )
             await storage.write_text(hb_key, hb_content, encoding="utf-8")
 
         # Customize state.json
@@ -277,7 +283,19 @@ class AgentManager:
         # Create workspace symlink
         workspace_dir = config_dir / "workspace"
         if not workspace_dir.exists():
-            workspace_dir.symlink_to(agent_dir / "workspace")
+            try:
+                workspace_dir.symlink_to(agent_dir / "workspace", target_is_directory=True)
+            except OSError as exc:
+                # Windows grants the right to make a symbolic link only to an
+                # elevated process or a developer mode installation. The
+                # OpenClaw container reads the workspace by its path, so a
+                # directory that stands in for the link is enough.
+                logger.warning(
+                    "Agent %s: workspace symlink unavailable (%s); using a directory",
+                    agent.id,
+                    exc,
+                )
+                workspace_dir.mkdir(parents=True, exist_ok=True)
 
         # Assign a unique port
         container_port = 18789 + hash(str(agent.id)) % 10000

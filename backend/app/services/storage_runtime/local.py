@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import asyncio
 from contextlib import asynccontextmanager
-import fcntl
 import os
 from pathlib import Path
 import shutil
@@ -14,6 +13,7 @@ import uuid
 import aiofiles
 from fastapi import HTTPException, status
 
+from app.services.storage_runtime.file_lock import acquire, is_lock_conflict, release
 from app.services.storage_runtime.base import (
     ConditionalWriteResult,
     StorageBackend,
@@ -23,6 +23,9 @@ from app.services.storage_runtime.base import (
     content_hash_bytes,
 )
 from app.services.storage_runtime.utils import normalize_storage_key
+
+
+_LOCK_FILE_NAME = ".clawith-storage-lock"
 
 
 class LocalStorageBackend(StorageBackend):
@@ -57,7 +60,8 @@ class LocalStorageBackend(StorageBackend):
             if entry.name == ".gitkeep" or entry.name.startswith(self._TEMP_FILE_PREFIX):
                 continue
             stat = entry.stat()
-            rel = str(entry.resolve().relative_to(self.root.resolve()))
+            # A storage key is always slash separated, on every platform.
+            rel = entry.resolve().relative_to(self.root.resolve()).as_posix()
             entries.append(
                 StorageEntry(
                     name=entry.name,
@@ -187,23 +191,32 @@ class LocalStorageBackend(StorageBackend):
 
     @asynccontextmanager
     async def _mutation_lock(self):
-        """Serialize mutations across every process sharing this local root."""
+        """Serialize mutations across every process sharing this local root.
+
+        The lock is a file lock on the root directory. On Linux that is
+        `flock`; on Windows it is the lock file API, so the same code runs on
+        a developer's machine and in the container.
+        """
         self.root.mkdir(parents=True, exist_ok=True)
         root = self.root.resolve()
-        open_flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
-        lock_fd = os.open(root, open_flags)
+        # The lock lives in a file inside the root. A directory cannot be
+        # opened for locking on every platform, and a file can.
+        lock_path = root / _LOCK_FILE_NAME
+        lock_fd = os.open(lock_path, os.O_RDWR | os.O_CREAT, 0o600)
         acquired = False
         try:
             while not acquired:
                 try:
-                    fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    acquire(lock_fd)
                     acquired = True
-                except BlockingIOError:
+                except OSError as exc:
+                    if not is_lock_conflict(exc):
+                        raise
                     await asyncio.sleep(0.01)
             yield
         finally:
             if acquired:
-                fcntl.flock(lock_fd, fcntl.LOCK_UN)
+                release(lock_fd)
             os.close(lock_fd)
 
     async def local_path_for(self, key: str) -> Path | None:
@@ -234,7 +247,12 @@ def _atomic_write_bytes(path: Path, data: bytes, temp_prefix: str) -> None:
     fd = os.open(temp_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o666)
     try:
         if existing_mode is not None:
-            os.fchmod(fd, existing_mode)
+            # Windows has no fchmod, so the mode is set on the path.
+            fchmod = getattr(os, "fchmod", None)
+            if fchmod is not None:
+                fchmod(fd, existing_mode)
+            else:
+                os.chmod(temp_path, existing_mode)
         with os.fdopen(fd, "wb", closefd=True) as temp_file:
             fd = -1
             temp_file.write(data)

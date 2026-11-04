@@ -219,15 +219,17 @@ class SubprocessBackend(BaseSandboxBackend):
         return [bind_flag, str(host), target]
 
     async def _terminate_and_reap_process(self, proc: asyncio.subprocess.Process) -> None:
-        """Terminate a subprocess group and wait until its direct child is reaped."""
+        """Terminate a subprocess group and wait until its direct child is reaped.
+
+        A process group is a POSIX idea. On Windows the child is terminated
+        on its own, and the descendants of the sandbox run inside a job that
+        the platform tears down with it.
+        """
         if proc.returncode is not None:
             await proc.wait()
             return
 
-        try:
-            os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
-        except (ProcessLookupError, PermissionError):
-            proc.kill()
+        self._signal_process_group(proc.pid, signal.SIGTERM)
 
         try:
             await asyncio.wait_for(
@@ -238,11 +240,24 @@ class SubprocessBackend(BaseSandboxBackend):
         except asyncio.TimeoutError:
             pass
 
-        try:
-            os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
-        except (ProcessLookupError, PermissionError):
-            proc.kill()
+        self._signal_process_group(proc.pid, signal.SIGKILL)
         await proc.wait()
+
+    @staticmethod
+    def _signal_process_group(pid: int, sig: int) -> None:
+        """Send a signal to the group of a process, or to the process itself."""
+        if not hasattr(os, "killpg") or not hasattr(os, "getpgid"):
+            # Windows has no process group. The direct child is what the
+            # caller asked for.
+            try:
+                os.kill(pid, sig)
+            except (ProcessLookupError, PermissionError, OSError):
+                pass
+            return
+        try:
+            os.killpg(os.getpgid(pid), sig)
+        except (ProcessLookupError, PermissionError):
+            os.kill(pid, sig)
 
     async def _ensure_workspace_venv(self, venv_path: Path) -> None:
         venv_python = venv_path / "bin" / "python"

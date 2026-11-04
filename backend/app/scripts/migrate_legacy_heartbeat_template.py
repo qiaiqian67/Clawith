@@ -305,7 +305,9 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def _current_template_bytes() -> bytes:
     template_path = Path(__file__).resolve().parents[2] / "agent_template" / HEARTBEAT_FILENAME
-    return template_path.read_bytes()
+    # The newline of the file is normalized, so the hash of the template is
+    # the hash of what an agent receives on every platform.
+    return template_path.read_text(encoding="utf-8").replace("\r\n", "\n").encode("utf-8")
 
 
 async def main(*, apply: bool = False) -> MigrationReport:

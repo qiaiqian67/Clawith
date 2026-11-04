@@ -272,10 +272,11 @@ async def list_files(
         if not path and entry.name == "enterprise_info":
             continue
         if is_enterprise:
-            rel = str(Path(entry.key).relative_to(f"enterprise_info_{current_user.tenant_id}"))
+            rel = Path(entry.key).relative_to(f"enterprise_info_{current_user.tenant_id}").as_posix()
             rel_path = f"enterprise_info/{rel}" if rel != "." else "enterprise_info"
         else:
-            rel_path = str(Path(entry.key).relative_to(str(agent_id)))
+            # A path in the API is always slash separated, on every platform.
+            rel_path = Path(entry.key).relative_to(str(agent_id)).as_posix()
         items.append(FileInfo(
             name=entry.name,
             path=rel_path,

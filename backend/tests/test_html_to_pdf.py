@@ -2,6 +2,17 @@ import sys
 import pytest
 from unittest.mock import MagicMock, patch
 from pathlib import Path
+
+try:
+    import weasyprint  # noqa: F401
+except OSError as exc:
+    # WeasyPrint loads a native library at import time. A computer without
+    # that library cannot import it, and the conversion cannot run there.
+    pytest.skip(
+        f"This computer has no WeasyPrint native library: {exc}",
+        allow_module_level=True,
+    )
+
 from app.services.document_conversion.html_to_pdf import convert_html_to_pdf
 
 @pytest.mark.asyncio

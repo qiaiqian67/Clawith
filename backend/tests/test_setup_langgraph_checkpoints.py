@@ -107,12 +107,34 @@ def _write_executable(path: Path, body: str) -> None:
     path.chmod(0o755)
 
 
+def _require_bash() -> None:
+    """Skip the test when the computer has no working bash.
+
+    The entrypoint is a shell script, so the test runs it with bash. A
+    computer without bash cannot run it, and that is an environment fact
+    rather than a product failure.
+    """
+    import shutil
+
+    bash = shutil.which("bash")
+    if bash is None:
+        pytest.skip("This computer has no bash, so the entrypoint cannot run.")
+    probe = subprocess.run(
+        [bash, "-c", "exit 0"],
+        capture_output=True,
+        check=False,
+    )
+    if probe.returncode != 0:
+        pytest.skip("The bash of this computer cannot run a script.")
+
+
 def _run_backend_entrypoint(
     tmp_path: Path,
     *,
     process_role: str = "all",
     python_exit: int = 0,
 ) -> tuple[subprocess.CompletedProcess[str], list[str]]:
+    _require_bash()
     call_log = tmp_path / "calls.log"
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir()

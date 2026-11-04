@@ -12,6 +12,7 @@ import pytest
 from app.services import activity_logger, agent_tools
 from app.services.agent_runtime.tool_execution import ToolExecutionOutcome
 from app.services.builtin_tool_definitions import builtin_model_definition
+from tests.symlink_helper import make_symlink
 
 
 IMAGE_GENERATION_TOOLS = (
@@ -684,7 +685,7 @@ async def test_generate_rejects_symlink_escape_before_dispatch(
     workspace.mkdir()
     outside = tmp_path / "outside"
     outside.mkdir()
-    (workspace / "escape").symlink_to(outside, target_is_directory=True)
+    make_symlink(workspace / "escape", outside)
 
     outcome, calls, _workspace = await _execute_generate(
         monkeypatch,

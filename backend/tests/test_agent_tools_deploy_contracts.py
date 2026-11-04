@@ -19,6 +19,7 @@ from app.services.builtin_tool_definitions import (
     builtin_model_definition,
     builtin_readiness,
 )
+from tests.symlink_helper import make_symlink
 
 
 VERCEL_TOOLS = (
@@ -441,7 +442,7 @@ async def test_vercel_upload_rejects_nested_symlink_escape_before_provider_io(
     source.mkdir(parents=True)
     outside = tmp_path / "secret.txt"
     outside.write_text("outside secret", encoding="utf-8")
-    (source / "leak.txt").symlink_to(outside)
+    make_symlink(source / "leak.txt", outside)
     provider = ForbiddenHTTP()
     await _install_vercel_dependencies(monkeypatch)
     monkeypatch.setattr(httpx, "AsyncClient", provider.factory)

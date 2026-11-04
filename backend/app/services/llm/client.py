@@ -589,10 +589,34 @@ class OpenAICompatibleClient(LLMClient):
         self._client: httpx.AsyncClient | None = None
 
     async def _get_client(self) -> httpx.AsyncClient:
-        """Get or create HTTP client."""
+        """Get or create HTTP client.
+
+        A local provider is reached directly. The environment proxy is for
+        the outside world, and routing a local address through one breaks
+        the streaming response.
+        """
         if self._client is None or self._client.is_closed:
-            self._client = httpx.AsyncClient(timeout=self.timeout, follow_redirects=True, proxy=None)
+            self._client = httpx.AsyncClient(
+                timeout=self.timeout,
+                follow_redirects=True,
+                proxy=None,
+                trust_env=not self._is_local_address(),
+            )
         return self._client
+
+    def _is_local_address(self) -> bool:
+        """Whether the base address is on this computer.
+
+        The address of a provider record can name the computer in several
+        ways, so every one of them counts.
+        """
+        raw = (self.base_url or "").strip().lower()
+        if not raw:
+            return False
+        if not raw.startswith(("http://", "https://")):
+            raw = f"http://{raw}"
+        host = raw.split("//")[-1].split("/")[0].split(":")[0]
+        return host in {"127.0.0.1", "localhost", "::1", "0.0.0.0", "[::1]"}
 
     def _get_headers(self) -> dict[str, str]:
         return {

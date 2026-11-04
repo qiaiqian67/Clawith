@@ -458,7 +458,7 @@ async def test_flush_temp_workspace_only_writes_changed_files(monkeypatch):
 
     temp_ws = await agent_tools._prepare_temp_workspace(agent_id, paths=["workspace"])
     try:
-        (temp_ws.root / "workspace" / "input.md").write_text("# Updated\n", encoding="utf-8")
+        (temp_ws.root / "workspace" / "input.md").write_text("# Updated\n", encoding="utf-8", newline="")
         result = await agent_tools.flush_temp_workspace(temp_ws)
     finally:
         temp_ws.cleanup()
