@@ -13,9 +13,9 @@ import uuid
 
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
-from psycopg import AsyncConnection as PsycopgAsyncConnection
 from sqlalchemy import text
-from sqlalchemy.ext.asyncio import AsyncEngine
+from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
+from sqlalchemy.pool import NullPool
 
 from app.config import Settings, get_settings
 from app.services.agent_runtime.a2a_completion import A2ARuntimeCompletionHandler
@@ -34,7 +34,6 @@ from app.services.agent_runtime.channel_provider_delivery import (
 )
 from app.services.agent_runtime.checkpoint_side_effects import RuntimeCheckpointSideEffects
 from app.services.agent_runtime.checkpointer import (
-    checkpoint_database_url,
     create_checkpointer,
 )
 from app.services.agent_runtime.command_worker import (
@@ -144,20 +143,28 @@ def runtime_worker_claimant() -> str:
 
 
 async def _checkpoint_migration_version(settings: Settings) -> int | None:
+    # The saver owns the checkpoint schema, so the ledger is read through the
+    # product database engine. The saver runs its own search path, so the
+    # schema is named in the statement.
+    engine = create_async_engine(
+        settings.DATABASE_URL,
+        poolclass=NullPool,
+    )
     try:
-        connection = await PsycopgAsyncConnection.connect(
-            checkpoint_database_url(settings),
-            autocommit=True,
-        )
-        async with connection:
-            async with connection.cursor() as cursor:
-                await cursor.execute("SELECT max(v) FROM checkpoint_migrations")
-                row = await cursor.fetchone()
+        async with engine.connect() as connection:
+            result = await connection.execute(
+                text(
+                    "SELECT max(v) FROM langgraph_checkpoint.checkpoint_migrations"
+                ),
+            )
+            row = result.first()
     except Exception as exc:
         raise RuntimeSchemaNotReady(
             "checkpoint_schema_unavailable",
             "LangGraph checkpoint schema is unavailable; run the explicit setup command",
         ) from exc
+    finally:
+        await engine.dispose()
     if row is None or row[0] is None:
         return None
     return int(row[0])
