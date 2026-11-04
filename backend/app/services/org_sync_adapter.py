@@ -1100,7 +1100,6 @@ class DingTalkOrgSyncAdapter(BaseOrgSyncAdapter):
         users: list[ExternalUser] = []
         cursor = 0
         dept_id = int(department_external_id)
-        dept_path = self._dept_path_map.get(department_external_id, "")
 
         async with httpx.AsyncClient() as client:
             while True:

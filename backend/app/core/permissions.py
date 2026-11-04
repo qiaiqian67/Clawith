@@ -9,7 +9,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import false, or_, select, exists
 
 from app.models.agent import Agent, AgentPermission
-from app.models.org import AgentAgentRelationship, AgentRelationship, OrgMember
+from app.models.org import OrgMember
 from app.models.user import User
 
 

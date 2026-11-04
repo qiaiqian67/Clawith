@@ -28,10 +28,9 @@ from sqlalchemy import select, delete
 from app.api.auth import get_current_user
 from app.database import async_session
 from app.models.identity import IdentityProvider
+from app.models.user import User
 from app.models.okr import (
     CompanyReport,
-    MemberDailyReport,
-    OKRAlignment,
     OKRKeyResult,
     OKRObjective,
     OKRProgressLog,
@@ -601,7 +600,6 @@ async def sync_okr_relationships(user=Depends(get_current_user)):
     if getattr(user, "role", None) not in ("org_admin", "platform_admin"):
         raise HTTPException(403, "Only org admins can sync OKR relationships")
 
-    from app.models.agent import Agent
 
     async with async_session() as db:
         # Locate the OKR Agent from settings

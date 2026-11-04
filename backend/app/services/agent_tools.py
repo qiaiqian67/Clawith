@@ -3049,8 +3049,8 @@ def _propose_experience_draft_outcome(
     arguments: dict,
 ) -> ToolExecutionOutcome:
     """Validate the human-gated draft without claiming a storage write."""
-    for field in ("title", "body", "applicability"):
-        value = arguments.get(field)
+    for field_name in ("title", "body", "applicability"):
+        value = arguments.get(field_name)
         if not isinstance(value, str) or not value.strip():
             return _typed_failure(
                 "propose_experience_draft requires non-empty title, body, and applicability.",
@@ -5693,7 +5693,7 @@ async def _read_webpage_outcome(arguments: dict) -> ToolExecutionOutcome:
     include_links = bool(arguments.get("include_links", False))
     max_bytes = 2_000_000
     headers = {
-        "User-Agent": "ClawithBot/1.0 (+https://clawith.ai) Mozilla/5.0",
+        "User-Agent": "ZeroXBot/1.0 Mozilla/5.0",
         "Accept": "text/html, text/plain, application/json, application/xml;q=0.9, text/*;q=0.8, */*;q=0.5",
     }
 
@@ -9577,7 +9577,7 @@ def _write_file(ws: Path, rel_path: str, content: str, tenant_id: str | None = N
 
     try:
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        file_path.write_text(content, encoding="utf-8")
+        file_path.write_text(content, encoding="utf-8", newline="")
         return f"✅ Written to {rel_path} ({len(content)} chars)"
     except Exception as e:
         return f"Write failed: {e}"
@@ -9663,7 +9663,7 @@ def _edit_file(ws: Path, rel_path: str, old_string: str, new_string: str, replac
             new_content = content.replace(old_string, new_string, 1)
             count = 1
 
-        file_path.write_text(new_content, encoding="utf-8")
+        file_path.write_text(new_content, encoding="utf-8", newline="")
         return f"✅ Replaced {count} occurrence(s) in {rel_path}"
 
     except Exception as e:
@@ -11821,7 +11821,6 @@ async def _plaza_add_comment(agent_id: uuid.UUID, arguments: dict) -> str:
                 mentions = re.findall(r'@(\S+)', content)
                 if mentions:
                     from app.services.notification_service import send_notification
-                    from app.models.user import User
                     # Load agents in tenant
                     a_q = select(AgentModel).where(AgentModel.id != agent_id)
                     if agent.tenant_id:
@@ -13064,7 +13063,7 @@ async def _handle_update_trigger_outcome(
                         "invalid_tool_arguments",
                     )
                 trigger.reason = new_reason
-                changes.append(f"reason updated")
+                changes.append("reason updated")
 
             commit_started = True
             await db.commit()
@@ -16750,7 +16749,7 @@ async def _feishu_wiki_list(agent_id: uuid.UUID, arguments: dict) -> str:
 
     space_id = node_info["space_id"]
     if not space_id:
-        return f"❌ 无法获取知识库 space_id，请检查 token 是否正确。"
+        return "❌ 无法获取知识库 space_id，请检查 token 是否正确。"
 
     async def _list_children(parent_token: str, depth: int) -> list[dict]:
         """Return flat list of {title, node_token, obj_token, has_child, depth}."""
@@ -17341,8 +17340,8 @@ async def _feishu_drive_share(agent_id: uuid.UUID, arguments: dict) -> str:
                         # Feishu platform policy: you cannot add yourself as a collaborator via API.
                         # Permissions must be granted by others, or set manually in the UI.
                         results.append(
-                            f"⚠️ 飞书平台安全限制：无法通过 API 为自己添加协作权限。\n"
-                            f"请手动操作：打开文档 → 右上角「分享」→ 添加自己并设置权限。"
+                            "⚠️ 飞书平台安全限制：无法通过 API 为自己添加协作权限。\n"
+                            "请手动操作：打开文档 → 右上角「分享」→ 添加自己并设置权限。"
                         )
                     elif _c in (99991672, 99991668):
                         return (
@@ -17452,7 +17451,7 @@ async def _feishu_drive_delete(agent_id: uuid.UUID, arguments: dict) -> str:
         elif code == 1061007:
             return f"❌ 文件 `{file_token}` 已被删除。"
         elif code == 1061045:
-            return f"⚠️ 接口频率限制，请稍后重试。（每秒最多 5 次）"
+            return "⚠️ 接口频率限制，请稍后重试。（每秒最多 5 次）"
         else:
             return f"❌ 删除{type_label}失败：{msg} (code {code})"
 
@@ -17628,14 +17627,14 @@ async def _feishu_calendar_create_outcome(
         )
 
     required: dict[str, str] = {}
-    for field in ("summary", "start_time", "end_time"):
-        value = arguments.get(field)
+    for field_name in ("summary", "start_time", "end_time"):
+        value = arguments.get(field_name)
         if not isinstance(value, str) or not value.strip():
             return _typed_failure(
-                f"feishu_calendar_create requires {field}.",
+                f"feishu_calendar_create requires {field_name}.",
                 "invalid_tool_arguments",
             )
-        required[field] = value.strip()
+        required[field_name] = value.strip()
     timezone_name = arguments.get("timezone", "Asia/Shanghai")
     if not isinstance(timezone_name, str) or not timezone_name.strip():
         return _typed_failure(
@@ -17999,7 +17998,7 @@ async def _feishu_calendar_list(agent_id: uuid.UUID, arguments: dict) -> str:
                             busy_lines.append(f"  🔴 {s}–{e}")
                         except Exception:
                             busy_lines.append(f"  🔴 {slot.get('start_time')}–{slot.get('end_time')}")
-                    freebusy_section = f"\n📌 **用户真实日历（忙碌时段）**：\n" + "\n".join(busy_lines)
+                    freebusy_section = "\n📌 **用户真实日历（忙碌时段）**：\n" + "\n".join(busy_lines)
                 else:
                     freebusy_section = "\n📌 **用户真实日历**：该时段全部空闲。"
         except Exception as _fe:
@@ -21592,7 +21591,7 @@ async def _agentbay_browser_click(agent_id: Optional[uuid.UUID], ws: Path, argum
     except RuntimeError as e:
         return f"❌ {str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Browser click failed")
+        logger.exception("[AgentBay] Browser click failed")
         return f"❌ 点击失败: {str(e)[:200]}"
 
 
@@ -21614,7 +21613,7 @@ async def _agentbay_browser_type(agent_id: Optional[uuid.UUID], ws: Path, argume
     except RuntimeError as e:
         return f"❌ {str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Browser type failed")
+        logger.exception("[AgentBay] Browser type failed")
         return f"❌ 输入失败: {str(e)[:200]}"
 
 
@@ -22400,8 +22399,8 @@ def _agentbay_find_installed_app_match(query: str, apps: list) -> tuple[dict | N
             _agentbay_app_field(app, "start_cmd", "startCmd"),
             _agentbay_app_field(app, "work_directory", "workDirectory"),
         ]
-        for field in fields:
-            field_norm = _agentbay_normalize_text(field)
+        for field_name in fields:
+            field_norm = _agentbay_normalize_text(field_name)
             if not field_norm:
                 continue
             if query_norm == field_norm:
@@ -22665,7 +22664,7 @@ async def _agentbay_computer_click(agent_id: Optional[uuid.UUID], ws: Path, argu
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer click failed")
+        logger.exception("[AgentBay] Computer click failed")
         return f"Click failed: {str(e)[:200]}"
 
 
@@ -22686,11 +22685,11 @@ async def _agentbay_computer_input_text(agent_id: Optional[uuid.UUID], ws: Path,
         result = await client.computer_input_text(text)
         if result.get("success"):
             return f"Typed text: {text[:100]}"
-        return f"Text input failed"
+        return "Text input failed"
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer input_text failed")
+        logger.exception("[AgentBay] Computer input_text failed")
         return f"Text input failed: {str(e)[:200]}"
 
 
@@ -22718,7 +22717,7 @@ async def _agentbay_computer_press_keys(agent_id: Optional[uuid.UUID], ws: Path,
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer press_keys failed")
+        logger.exception("[AgentBay] Computer press_keys failed")
         return f"Key press failed: {str(e)[:200]}"
 
 
@@ -22740,11 +22739,11 @@ async def _agentbay_computer_scroll(agent_id: Optional[uuid.UUID], ws: Path, arg
         result = await client.computer_scroll(x, y, direction=direction, amount=amount)
         if result.get("success"):
             return f"Scrolled {direction} by {amount} step(s) at ({x}, {y})"
-        return f"Scroll failed"
+        return "Scroll failed"
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer scroll failed")
+        logger.exception("[AgentBay] Computer scroll failed")
         return f"Scroll failed: {str(e)[:200]}"
 
 
@@ -22764,11 +22763,11 @@ async def _agentbay_computer_move_mouse(agent_id: Optional[uuid.UUID], ws: Path,
         result = await client.computer_move_mouse(x, y)
         if result.get("success"):
             return f"Mouse moved to ({x}, {y})"
-        return f"Mouse move failed"
+        return "Mouse move failed"
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer move_mouse failed")
+        logger.exception("[AgentBay] Computer move_mouse failed")
         return f"Mouse move failed: {str(e)[:200]}"
 
 
@@ -22791,11 +22790,11 @@ async def _agentbay_computer_drag_mouse(agent_id: Optional[uuid.UUID], ws: Path,
         result = await client.computer_drag_mouse(from_x, from_y, to_x, to_y, button=button)
         if result.get("success"):
             return f"Dragged from ({from_x}, {from_y}) to ({to_x}, {to_y})"
-        return f"Drag failed"
+        return "Drag failed"
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer drag_mouse failed")
+        logger.exception("[AgentBay] Computer drag_mouse failed")
         return f"Drag failed: {str(e)[:200]}"
 
 
@@ -22819,7 +22818,7 @@ async def _agentbay_computer_get_screen_size(agent_id: Optional[uuid.UUID], ws: 
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer get_screen_size failed")
+        logger.exception("[AgentBay] Computer get_screen_size failed")
         return f"Get screen size failed: {str(e)[:200]}"
 
 
@@ -22863,7 +22862,7 @@ async def _agentbay_computer_start_app(agent_id: Optional[uuid.UUID], ws: Path, 
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer start_app failed")
+        logger.exception("[AgentBay] Computer start_app failed")
         return f"Start application failed: {str(e)[:200]}"
 
 
@@ -22899,7 +22898,7 @@ async def _agentbay_computer_get_installed_apps(agent_id: Optional[uuid.UUID], w
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer get_installed_apps failed")
+        logger.exception("[AgentBay] Computer get_installed_apps failed")
         return f"Get installed applications failed: {str(e)[:200]}"
 
 
@@ -22923,7 +22922,7 @@ async def _agentbay_computer_get_cursor_position(agent_id: Optional[uuid.UUID], 
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer get_cursor_position failed")
+        logger.exception("[AgentBay] Computer get_cursor_position failed")
         return f"Get cursor position failed: {str(e)[:200]}"
 
 
@@ -22947,7 +22946,7 @@ async def _agentbay_computer_get_active_window(agent_id: Optional[uuid.UUID], ws
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer get_active_window failed")
+        logger.exception("[AgentBay] Computer get_active_window failed")
         return f"Get active window failed: {str(e)[:200]}"
 
 
@@ -22972,7 +22971,7 @@ async def _agentbay_computer_activate_window(agent_id: Optional[uuid.UUID], ws: 
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer activate_window failed")
+        logger.exception("[AgentBay] Computer activate_window failed")
         return f"Activate window failed: {str(e)[:200]}"
 
 
@@ -23007,7 +23006,7 @@ async def _agentbay_computer_list_windows(agent_id: Optional[uuid.UUID], ws: Pat
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer list_windows failed")
+        logger.exception("[AgentBay] Computer list_windows failed")
         return f"List windows failed: {str(e)[:200]}"
 
 
@@ -23076,7 +23075,7 @@ async def _agentbay_computer_close_window(agent_id: Optional[uuid.UUID], ws: Pat
         except RuntimeError as e:
             return f"{str(e)}"
         except Exception as e:
-            logger.exception(f"[AgentBay] Computer close_window candidate lookup failed")
+            logger.exception("[AgentBay] Computer close_window candidate lookup failed")
             return f"Close window requires window_id. Candidate lookup failed: {str(e)[:200]}"
 
     try:
@@ -23092,7 +23091,7 @@ async def _agentbay_computer_close_window(agent_id: Optional[uuid.UUID], ws: Pat
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer close_window failed")
+        logger.exception("[AgentBay] Computer close_window failed")
         return f"Close window failed: {str(e)[:200]}"
 
 
@@ -23138,7 +23137,7 @@ async def _agentbay_computer_dismiss_dialog(agent_id: Optional[uuid.UUID], ws: P
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer dismiss_dialog failed")
+        logger.exception("[AgentBay] Computer dismiss_dialog failed")
         return f"Dismiss dialog failed: {str(e)[:200]}"
 
 
@@ -23164,7 +23163,7 @@ async def _agentbay_computer_list_visible_apps(agent_id: Optional[uuid.UUID], ws
     except RuntimeError as e:
         return f"{str(e)}"
     except Exception as e:
-        logger.exception(f"[AgentBay] Computer list_visible_apps failed")
+        logger.exception("[AgentBay] Computer list_visible_apps failed")
         return f"List applications failed: {str(e)[:200]}"
 
 
@@ -23176,7 +23175,7 @@ async def _agentbay_file_transfer(agent_id: Optional[uuid.UUID], ws: Path, argum
       - env        → workspace: download_file(remote_path, local_workspace_path) [single SDK call]
       - env A      → env B:    download to /tmp/<uuid>, upload to env B, cleanup /tmp [transparent]
 
-    The 'local' side of the SDK calls is always the Clawith backend server,
+    The 'local' side of the SDK calls is always the ZeroX backend server,
     which has access to the agent workspace directory.
     """
     if not agent_id:
@@ -24238,10 +24237,10 @@ async def _update_kr_content_outcome(
             "At least one KR content field must be provided.",
             "invalid_tool_arguments",
         )
-    for field in ("title", "unit", "focus_ref"):
-        if field in updates and not isinstance(updates[field], str):
+    for field_name in ("title", "unit", "focus_ref"):
+        if field_name in updates and not isinstance(updates[field_name], str):
             return _typed_failure(
-                f"{field} must be a string.",
+                f"{field_name} must be a string.",
                 "invalid_tool_arguments",
             )
     if "title" in updates and not updates["title"].strip():
@@ -25091,10 +25090,10 @@ async def _create_key_result_outcome(
     )
     if argument_error is not None:
         return argument_error
-    for field in ("unit", "focus_ref"):
-        if field in arguments and not isinstance(arguments[field], str):
+    for field_name in ("unit", "focus_ref"):
+        if field_name in arguments and not isinstance(arguments[field_name], str):
             return _typed_failure(
-                f"{field} must be a string.",
+                f"{field_name} must be a string.",
                 "invalid_tool_arguments",
             )
     designated_error = await _require_designated_okr_agent(agent_id)
@@ -25410,10 +25409,10 @@ async def _update_objective_outcome(
             "update_objective requires at least one supported field to update.",
             "invalid_tool_arguments",
         )
-    for field in ("title", "description"):
-        if field in arguments and not isinstance(arguments[field], str):
+    for field_name in ("title", "description"):
+        if field_name in arguments and not isinstance(arguments[field_name], str):
             return _typed_failure(
-                f"update_objective {field} must be a string.",
+                f"update_objective {field_name} must be a string.",
                 "invalid_tool_arguments",
             )
     if "title" in arguments and not arguments["title"].strip():
@@ -25634,7 +25633,7 @@ async def _update_any_kr_progress(agent_id: uuid.UUID | None, user_id: uuid.UUID
 
             return f"Successfully updated KR '{kr.title}'. Progress: {old_val} -> {kr.current_value} {kr.unit or ''}. Status: {kr.status}"
     except Exception as e:
-        logger.exception(f"[OKR] update_any_kr_progress failed")
+        logger.exception("[OKR] update_any_kr_progress failed")
         return f"Failed to update kr progress: {str(e)[:200]}"
 
 

@@ -58,15 +58,35 @@ dev = [
     "pytest>=8.0.0",
     "pytest-asyncio>=0.24.0",
     "httpx>=0.27.0",
-    "ruff>=0.8.0",
+    # The linter is pinned, so a new version cannot change the gate.
+    "ruff==0.17.3",
 ]
 
 [tool.ruff]
 target-version = "py311"
 line-length = 120
 
+[tool.ruff.lint]
+# The rules the repository follows. The set is named, so a new version of the
+# linter cannot change what the gate means.
+#
+# Only the rules that pass today are named. A rule joins the set when the
+# code it guards is clean, so the gate grows with the code instead of
+# against it.
+select = [
+    "F",   # pyflakes: undefined names, unused imports, shadowing
+]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+# The historical migrations import what an earlier revision needed.
+"alembic/versions/*" = ["F401", "F811"]
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+# A test module that imports another test module by its package path needs
+# the backend directory on the path, so `tests.test_auth` resolves.
+pythonpath = ["."]
 
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]

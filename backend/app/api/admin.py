@@ -214,7 +214,6 @@ async def toggle_company(
 
 # ─── Platform Metrics Dashboard ─────────────────────────
 
-from typing import Any
 
 @router.get("/metrics/timeseries", response_model=list[dict[str, Any]])
 async def get_platform_timeseries(

@@ -335,7 +335,7 @@ class RegistrationService:
 
         except Exception:
             logger.exception("SSO registration failed for %s provider", provider_type)
-            return None, False, f"SSO registration failed"
+            return None, False, "SSO registration failed"
 
     # ── Tenant for registration ──────────────────────────────────────────────
 
