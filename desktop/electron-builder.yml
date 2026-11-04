@@ -18,12 +18,11 @@ electronFuses:
   loadBrowserProcessSpecificV8Snapshot: false
   grantFileProtocolExtraPrivileges: false
 
-# The release feed of the client. Set ZEROX_UPDATE_URL before a package to make
-# the client check that address for a new build. Without it the client still
-# builds and installs; it just cannot update itself.
-publish:
-  provider: generic
-  url: ${env.ZEROX_UPDATE_URL}
+# The release feed of the client is not named here. `scripts/package.mjs` adds
+# it from ZEROX_UPDATE_URL when that variable is set, because a build without a
+# feed is a supported build: it installs and runs, and it never updates itself.
+# A pattern in this file would make the packager fail when the variable is
+# absent, which is the opposite of what the release guide promises.
 
 files:
   - out/**/*

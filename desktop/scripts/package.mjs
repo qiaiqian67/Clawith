@@ -61,7 +61,14 @@ const env = {
     'https://npmmirror.com/mirrors/electron-builder-binaries/',
 };
 
-run('npx', ['electron-builder', ...target, ...(wantDir ? ['--dir'] : [])], env);
+// The feed is part of the package only when the release sets one. The release
+// guide promises that a build without a feed still installs and runs, so an
+// unset variable must not fail the packager.
+const publishArgs = process.env.ZEROX_UPDATE_URL
+  ? ['-c.publish.provider=generic', `-c.publish.url=${process.env.ZEROX_UPDATE_URL}`]
+  : [];
+
+run('npx', ['electron-builder', ...target, ...publishArgs, ...(wantDir ? ['--dir'] : [])], env);
 
 // 3. What the build made, and what a signed install would need.
 const dist = join(root, 'dist');
