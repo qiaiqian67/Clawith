@@ -71,6 +71,9 @@ async def create_task(
     agent, _access = await check_agent_access(db, current_user, agent_id)
     task = Task(
         agent_id=agent_id,
+        # The row is tenant scoped, so it must carry the tenant of the agent:
+        # a task without one is invisible to the list that reads it back.
+        tenant_id=getattr(current_user, "tenant_id", None),
         title=data.title,
         description=data.description,
         type=data.type,
