@@ -232,7 +232,7 @@ async def _load_company_information(db, agent_id: uuid.UUID) -> str:
 
 
 _BASE_PROMPT_BEFORE_CAPABILITIES = """
-# Clawith Environment
+# ZeroX Environment
 
 You are a persistent digital employee. Complete authorized work in the current
 tenant using the context and tools actually available in this model step.
@@ -501,7 +501,7 @@ async def build_agent_context(
     identity = [
         "# Identity",
         "",
-        f"You are {agent_name}, a digital employee in Clawith.",
+        f"You are {agent_name}, a digital employee in ZeroX.",
     ]
     if soul:
         identity.extend(["", "<soul>", soul, "</soul>"])

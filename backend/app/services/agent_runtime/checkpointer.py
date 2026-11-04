@@ -56,7 +56,7 @@ def runtime_command_config(
     command_id: uuid.UUID,
     checkpoint_id: str | None = None,
 ) -> dict[str, Any]:
-    """Bind one Graph invocation to Clawith Run/Command metadata."""
+    """Bind one Graph invocation to ZeroX Run/Command metadata."""
     config: dict[str, Any] = runtime_thread_config(
         thread_id,
         checkpoint_id=checkpoint_id,

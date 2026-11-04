@@ -56,9 +56,9 @@ async def test_base_prompt_starts_with_name_and_soul_and_never_injects_self_role
             allowed_tool_names={"wait"},
         )
 
-    assert static.startswith("# Identity\n\nYou are TestAgent, a digital employee in Clawith.")
+    assert static.startswith("# Identity\n\nYou are TestAgent, a digital employee in ZeroX.")
     assert "<soul>\nBe precise and preserve evidence.\n</soul>" in static
-    assert static.index("<soul>") < static.index("# Clawith Environment")
+    assert static.index("<soul>") < static.index("# ZeroX Environment")
     assert "THIS ROLE MUST NOT ENTER THE MODEL" not in f"{static}\n{dynamic}"
     assert "# Memory" in static
     assert "The release owner is Alice." not in static

@@ -535,7 +535,7 @@ _BUILTIN_TOOL_SOURCE = [
     {
         "name": "send_platform_message",
         "display_name": "Platform Message",
-        "description": "Send a proactive message to a human colleague on the Clawith first-party platform (web or app). Use query_directory first, then provide at least one of target_member_id or platform_user_id.",
+        "description": "Send a proactive message to a human colleague on the ZeroX first-party platform (web or app). Use query_directory first, then provide at least one of target_member_id or platform_user_id.",
         "category": "communication",
         "icon": "🌐",
         "is_default": True,
@@ -1464,7 +1464,7 @@ _BUILTIN_TOOL_SOURCE = [
                     "label": "Extra Headers JSON",
                     "type": "textarea",
                     "default": "",
-                    "placeholder": "{\n  \"HTTP-Referer\": \"https://your-app.example\",\n  \"X-Title\": \"Clawith\"\n}",
+                    "placeholder": "{\n  \"HTTP-Referer\": \"https://your-app.example\",\n  \"X-Title\": \"ZeroX\"\n}",
                     "advanced": True,
                 },
                 {

@@ -1,4 +1,4 @@
-"""Clawith Backend — FastAPI Application Entry Point."""
+"""ZeroX Backend — FastAPI Application Entry Point."""
 
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -515,5 +515,5 @@ _version_cache = _load_version_info()
 
 @app.get("/api/version", tags=["system"])
 async def get_version():
-    """Return current Clawith version and commit hash."""
+    """Return current ZeroX version and commit hash."""
     return _version_cache

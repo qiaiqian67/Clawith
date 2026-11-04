@@ -582,17 +582,17 @@ async def get_setup_guide(
     base_url = "https://try.clawith.ai"
     is_zh = (accept_language or "").lower().startswith("zh")
 
-    skill_content = f"""请在 OpenClaw Agent 中创建技能文件 skills/clawith_sync.md，内容如下；然后把「使用 clawith_sync 技能检查 Clawith inbox 并处理待办消息」加入 HEARTBEAT.md：
+    skill_content = f"""请在 OpenClaw Agent 中创建技能文件 skills/clawith_sync.md，内容如下；然后把「使用 clawith_sync 技能检查 ZeroX inbox 并处理待办消息」加入 HEARTBEAT.md：
 
 ---
 name: clawith_sync
-description: Sync with Clawith platform — check inbox, submit results, and send messages.
+description: Sync with ZeroX platform — check inbox, submit results, and send messages.
 ---
 
-# Clawith Sync
+# ZeroX Sync
 
 ## 使用场景
-在每次 heartbeat 时检查 Clawith 平台是否有新消息。
+在每次 heartbeat 时检查 ZeroX 平台是否有新消息。
 你也可以主动给 gateway 通讯录 payload 中返回的精确目标发送消息。
 
 ## 操作说明
@@ -605,7 +605,7 @@ description: Sync with Clawith platform — check inbox, submit results, and sen
 响应中包含 messages 数组。每条消息包括：
 - id：消息 ID，回报结果时使用
 - content：消息内容
-- sender_user_name：发送消息的 Clawith 用户名
+- sender_user_name：发送消息的 ZeroX 用户名
 - sender_user_id：发送者 ID
 - conversation_id：消息所属会话
 - history：该会话的历史消息，用于理解上下文
@@ -635,13 +635,13 @@ description: Sync with Clawith platform — check inbox, submit results, and sen
 系统会自动选择合适渠道。发给 Agent 时，回复会出现在下一次 poll 中；发给人类成员时，会通过可用渠道投递，例如飞书。
 """ if is_zh else f"""---
 name: clawith_sync
-description: Sync with Clawith platform — check inbox, submit results, and send messages.
+description: Sync with ZeroX platform — check inbox, submit results, and send messages.
 ---
 
-# Clawith Sync
+# ZeroX Sync
 
 ## When to use
-Check for new messages from the Clawith platform during every heartbeat cycle.
+Check for new messages from the ZeroX platform during every heartbeat cycle.
 You can proactively send messages to exact targets returned in the gateway directory payload.
 
 ## Instructions
@@ -654,7 +654,7 @@ Make an HTTP GET request:
 The response contains a `messages` array. Each message includes:
 - `id` — unique message ID (use this for reporting)
 - `content` — the message text
-- `sender_user_name` — name of the Clawith user who sent it
+- `sender_user_name` — name of the ZeroX user who sent it
 - `sender_user_id` — unique ID of the sender
 - `conversation_id` — the conversation this message belongs to
 - `history` — array of previous messages in this conversation for context
@@ -687,9 +687,9 @@ For humans, the message is delivered via their available channel (e.g. Feishu).
 """
 
     heartbeat_line = (
-        "- 使用 clawith_sync 技能检查 Clawith inbox 并处理待办消息"
+        "- 使用 clawith_sync 技能检查 ZeroX inbox 并处理待办消息"
         if is_zh
-        else "- Check Clawith inbox using the clawith_sync skill and process any pending messages"
+        else "- Check ZeroX inbox using the clawith_sync skill and process any pending messages"
     )
 
     return {

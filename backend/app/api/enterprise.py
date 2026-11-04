@@ -14,7 +14,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import get_settings
-from app.core.security import get_current_admin, get_current_user, require_role, encrypt_data
+from app.core.security import get_current_admin, get_current_user, encrypt_data
 from app.database import async_session, get_db
 from app.models.org import OrgDepartment, OrgMember
 from app.models.identity import IdentityProvider
@@ -1666,8 +1666,6 @@ async def delete_identity_provider(
 
 # ─── Org Structure ──────────────────────────────────────
 
-from app.models.org import OrgDepartment, OrgMember
-
 
 @router.get("/org/departments")
 async def list_org_departments(
@@ -1872,8 +1870,8 @@ async def wecom_org_sync_verify(
 
     Configure URL in WeCom: {BASE_URL}/api/enterprise/org/wecom-verify/{provider_id}
 
-    Required provider config keys (set via Clawith WeCom config page):
-      - verify_token:   the Token string set in both WeCom and Clawith
+    Required provider config keys (set via ZeroX WeCom config page):
+      - verify_token:   the Token string set in both WeCom and ZeroX
       - verify_aes_key: the EncodingAESKey provided by WeCom (43 chars, base64url)
     """
     from fastapi.responses import Response as _Response

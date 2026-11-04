@@ -37,7 +37,7 @@ _STABLE_REFERENCE_ID_RE = re.compile(r"^[A-Za-z0-9_-]{1,200}$")
 _HTTP_EVIDENCE_TOOL_NAMES = frozenset(
     {"read_webpage", "upload_image", "publish_page"}
 )
-_TASK_COMPLETION_SYSTEM_PROMPT = """You are the independent completion gate for one Clawith Run.
+_TASK_COMPLETION_SYSTEM_PROMPT = """You are the independent completion gate for one ZeroX Run.
 
 Decide whether the current task is fully completed from the supplied evidence.
 Later authenticated human resume messages are authoritative amendments to the

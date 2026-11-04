@@ -285,7 +285,7 @@ _RUNTIME_WAIT_TOOL_DEFINITION: dict = {
     },
 }
 _GROUP_RUNTIME_INSTRUCTION = """
-Current Run is executing inside a native Clawith group. Follow these platform rules:
+Current Run is executing inside a native ZeroX group. Follow these platform rules:
 - Answer only from this group, this group session, the injected Agent context, and data returned by enabled tools.
 - Group scope is not a closed Tool allowlist. Normal Agent tools, the Agent's own Workspace, and global A2A remain available whenever they are present in the current Tool Schema.
 - File tools that expose `workspace_scope` can access both workspaces during Group Runs. Use `group` for every path in `group_context.workspace_index` and `agent` only for the Agent's private Workspace. Tools without that parameter retain their original scope. Never infer that a path is absent from one scope because it is missing from the other.

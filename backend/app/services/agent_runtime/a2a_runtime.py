@@ -710,13 +710,13 @@ def _target_goal(source_agent: Agent, request: _A2ARequest) -> str:
 def _target_runtime_instruction(mode: A2AMode) -> str:
     if mode in _RESPONSE_MODES:
         return (
-            "This Run was initiated by another digital employee through Clawith "
+            "This Run was initiated by another digital employee through ZeroX "
             "A2A. The verified final answer is returned to the source Run "
             "automatically. Do not call send_message_to_agent merely to return "
             "this answer."
         )
     return (
-        "This is a one-way Clawith A2A notification. Process it within the "
+        "This is a one-way ZeroX A2A notification. Process it within the "
         "authorized scope and do not call send_message_to_agent merely to "
         "acknowledge receipt."
     )
