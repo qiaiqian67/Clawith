@@ -67,6 +67,29 @@ class UserLogin(BaseModel):
     tenant_id: uuid.UUID | None = None  # Optional: when set, restrict login to users of this tenant
 
 
+class LoginCodeRequest(BaseModel):
+    """Ask for a one-time sign-in code for an email address."""
+
+    email: EmailStr
+    tenant_id: uuid.UUID | None = None  # Optional: when set, restrict the sign-in to this tenant
+
+
+class LoginCodeVerifyRequest(BaseModel):
+    """Redeem a one-time sign-in code."""
+
+    email: EmailStr
+    code: str = Field(min_length=4, max_length=16)
+    tenant_id: uuid.UUID | None = None  # Optional: when set, restrict the sign-in to this tenant
+
+
+class LoginCodeSentResponse(BaseModel):
+    """A code was requested. The response never says whether the account exists."""
+
+    ok: bool = True
+    message: str = "If an account with that email exists, a sign-in code has been sent."
+    resend_available_at: int | None = None
+
+
 class ForgotPasswordRequest(BaseModel):
     email: EmailStr
 

@@ -85,7 +85,7 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # App
-    APP_NAME: str = "Clawith"
+    APP_NAME: str = "ZeroX"
     APP_VERSION: str = _read_version()
     DEBUG: bool = False
     SECRET_KEY: str = "change-me-in-production"
@@ -108,6 +108,10 @@ class Settings(BaseSettings):
     PASSWORD_RESET_TOKEN_EXPIRE_MINUTES: int = 60
     EMAIL_VERIFICATION_TOKEN_EXPIRE_MINUTES: int = 60  # 1 hour
     EMAIL_VERIFICATION_REQUIRED: bool = False  # Require email verification for login
+    # Passwordless sign-in by email code.
+    LOGIN_CODE_EXPIRE_MINUTES: int = 10  # 10 minutes
+    LOGIN_CODE_MAX_ATTEMPTS: int = 5
+    LOGIN_CODE_ENABLED: bool = True
 
     # File Storage
     STORAGE_BACKEND: str = "local"

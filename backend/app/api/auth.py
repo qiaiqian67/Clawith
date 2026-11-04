@@ -4,6 +4,7 @@ import secrets
 import uuid
 from datetime import datetime, timezone
 from time import perf_counter
+from collections.abc import Sequence
 from typing import Any
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query, Request, Response, status
@@ -25,6 +26,9 @@ from app.schemas.schemas import (
     IdentityBindRequest,
     IdentityOut,
     IdentityUnbindRequest,
+    LoginCodeRequest,
+    LoginCodeSentResponse,
+    LoginCodeVerifyRequest,
     MultiTenantResponse,
     OAuthAuthorizeResponse,
     OAuthCallbackRequest,
@@ -471,7 +475,7 @@ async def login(data: UserLogin, background_tasks: BackgroundTasks):
         )
         password_verify_ms = (perf_counter() - stage_start) * 1000
 
-        if not password_valid:
+        if not password_valid or identity is None:
             outcome = "invalid_credentials"
             logger.warning(
                 f"[LOGIN] Invalid credentials for {data.login_identifier} identity_id={identity.id if identity else 'None'}"
@@ -528,74 +532,188 @@ async def login(data: UserLogin, background_tasks: BackgroundTasks):
         login_candidates = await user_dao.get_login_users_with_tenants(identity.id)
         user_lookup_ms = (perf_counter() - stage_start) * 1000
 
-        if not login_candidates:
-            outcome = "no_tenant_association"
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="No organization associated with this account."
-            )
-
-        # 4. Handle Tenant Selection
+        # 4. Issue the session for this identity.
+        # The tenant choice belongs to the identity, not to the credential, so the
+        # password path and the code path share one owner for it.
         stage_start = perf_counter()
-        if not data.tenant_id:
-            # If multiple tenants, return choice
-            if len(login_candidates) > 1:
-                tenant_choices = []
-                for user, tenant in login_candidates:
-                    tenant_choices.append(
-                        TenantChoice(
-                            tenant_id=user.tenant_id,
-                            tenant_name=tenant.name if tenant else "Create or Join Organization",
-                            tenant_slug=tenant.slug if tenant else "",
-                            logo_url=tenant.logo_url if tenant else None,
-                        )
-                    )
-
-                tenant_processing_ms = (perf_counter() - stage_start) * 1000
-                outcome = "tenant_selection_required"
-                return MultiTenantResponse(
-                    requires_tenant_selection=True,
-                    login_identifier=data.login_identifier,
-                    tenants=tenant_choices,
-                )
-
-            # Only one tenant
-            user, tenant = login_candidates[0]
-        else:
-            # Specific tenant requested (Dedicated Link flow)
-            selected = next((entry for entry in login_candidates if entry[0].tenant_id == data.tenant_id), None)
-
-            # Cross-tenant access check
-            if not selected:
-                tenant_processing_ms = (perf_counter() - stage_start) * 1000
-                outcome = "tenant_forbidden"
-                raise HTTPException(
-                    status_code=status.HTTP_403_FORBIDDEN,
-                    detail="This account does not belong to the selected organization.",
-                )
-
-            user, tenant = selected
-
-        if tenant and not tenant.is_active:
+        try:
+            result = await _issue_token_for_identity(identity, data.tenant_id, login_candidates)
+        except HTTPException as exc:
             tenant_processing_ms = (perf_counter() - stage_start) * 1000
-            outcome = "tenant_inactive"
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Your organization has been disabled.",
-            )
-
+            if exc.status_code == status.HTTP_403_FORBIDDEN:
+                outcome = "tenant_forbidden"
+            else:
+                outcome = "no_tenant_association"
+            raise
         tenant_processing_ms = (perf_counter() - stage_start) * 1000
 
-        # 6. Generate Token
-        token = create_access_token(str(user.id), user.role, tenant_id=str(getattr(user, "tenant_id", None)) if getattr(user, "tenant_id", None) else None)
+        if isinstance(result, MultiTenantResponse):
+            outcome = "tenant_selection_required"
+            return result
+
         outcome = "success"
-        return TokenResponse(
-            access_token=token,
-            user=UserOut.model_validate(user),
-            identity=IdentityOut.model_validate(identity),
-            needs_company_setup=user.tenant_id is None,
-        )
+        return result
     finally:
         _log_login_metrics()
+
+
+async def _issue_token_for_identity(
+    identity: Any,
+    tenant_id: uuid.UUID | None,
+    login_candidates: Sequence[tuple[Any, Any]] | None = None,
+) -> TokenResponse | MultiTenantResponse:
+    """Issue the sign-in token for an identity, or ask the client to pick a tenant.
+
+    This is the shared tail of every sign-in path: the identity is already
+    proven, so the only remaining decision is which organization the session
+    belongs to. The tenant choice belongs to the identity, never to the
+    credential, so a code or a password reaches the same place.
+    """
+    if login_candidates is None:
+        login_candidates = await user_dao.get_login_users_with_tenants(identity.id)
+
+    if not login_candidates:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="No organization associated with this account.",
+        )
+
+    if tenant_id is not None:
+        selected = next(
+            (entry for entry in login_candidates if entry[0].tenant_id == tenant_id),
+            None,
+        )
+        if not selected:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="This account does not belong to the selected organization.",
+            )
+        user, tenant = selected
+    elif len(login_candidates) > 1:
+        return MultiTenantResponse(
+            requires_tenant_selection=True,
+            login_identifier=identity.email or identity.username or "",
+            tenants=[
+                TenantChoice(
+                    tenant_id=candidate.tenant_id,
+                    tenant_name=tenant_meta.name if tenant_meta else "Create or Join Organization",
+                    tenant_slug=tenant_meta.slug if tenant_meta else "",
+                    logo_url=tenant_meta.logo_url if tenant_meta else None,
+                )
+                for candidate, tenant_meta in login_candidates
+            ],
+        )
+    else:
+        user, tenant = login_candidates[0]
+
+    if tenant and not tenant.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Your organization has been disabled.",
+        )
+
+    token = create_access_token(
+        str(user.id),
+        user.role,
+        tenant_id=str(getattr(user, "tenant_id", None)) if getattr(user, "tenant_id", None) else None,
+    )
+    return TokenResponse(
+        access_token=token,
+        user=UserOut.model_validate(user),
+        identity=IdentityOut.model_validate(identity),
+        needs_company_setup=user.tenant_id is None,
+    )
+
+
+@router.post("/login/code", response_model=LoginCodeSentResponse)
+async def request_login_code(
+    data: LoginCodeRequest,
+    background_tasks: BackgroundTasks,
+):
+    """Send a one-time sign-in code to an email address.
+
+    The response never says whether the account exists. An unknown address
+    and a known one produce the same answer, so the endpoint cannot be used to
+    discover which addresses are registered.
+    """
+    from app.services.login_code_service import login_code_service
+    from app.services.system_email_service import resolve_email_config_async
+
+    if not settings.LOGIN_CODE_ENABLED:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Sign-in codes are currently unavailable.",
+        )
+
+    generic_response = LoginCodeSentResponse()
+
+    email_config = await resolve_email_config_async()
+    if not email_config:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Sign-in codes are currently unavailable (no mail server configured).",
+        )
+
+    identity = await identity_dao.get_by_email(data.email)
+    if not identity or not identity.is_active or not identity.email:
+        return generic_response
+
+    try:
+        raw_code, expires_at = await login_code_service.create_login_code(
+            identity.id,
+            identity.email,
+        )
+        expiry_minutes = int((expires_at - datetime.now(timezone.utc)).total_seconds() // 60)
+        background_tasks.add_task(
+            login_code_service.send_login_code_email,
+            identity.email,
+            identity.username or "User",
+            raw_code,
+            expiry_minutes,
+        )
+    except Exception as exc:
+        logger.warning(f"Failed to send sign-in code to {data.email}: {exc}")
+
+    return generic_response
+
+
+@router.post("/login/code/verify")
+async def verify_login_code(data: LoginCodeVerifyRequest):
+    """Redeem a one-time sign-in code and return the session token."""
+    from app.services.login_code_service import login_code_service
+
+    identity = await identity_dao.get_by_email(data.email)
+    if not identity:
+        # A wrong address and a wrong code fail the same way, so the error
+        # does not say which addresses are registered.
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid or expired sign-in code.",
+        )
+
+    attempts = await login_code_service.record_failed_attempt(identity.id)
+    if attempts > settings.LOGIN_CODE_MAX_ATTEMPTS:
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail="Too many attempts. Request a new sign-in code.",
+        )
+
+    token_data = await login_code_service.consume_login_code(data.code)
+    if not token_data or token_data["identity_id"] != identity.id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid or expired sign-in code.",
+        )
+
+    if not identity.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Your account has been disabled.",
+        )
+
+    await login_code_service.clear_failed_attempts(identity.id)
+
+    return await _issue_token_for_identity(identity, data.tenant_id)
 
 
 @router.get("/email-hint")
