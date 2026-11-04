@@ -132,9 +132,14 @@ def update_wechat_context_cache(
         "updated_at": datetime.now(timezone.utc).isoformat(),
     }
     if len(cache) > WECHAT_CONTEXT_CACHE_LIMIT:
+        # The oldest entry goes first. The timestamp alone is not enough to
+        # order them, because several entries can share one clock tick.
         ordered = sorted(
             cache.items(),
-            key=lambda item: str((item[1] or {}).get("updated_at") or ""),
+            key=lambda item: (
+                str((item[1] or {}).get("updated_at") or ""),
+                item[0],
+            ),
             reverse=True,
         )
         cache = dict(ordered[:WECHAT_CONTEXT_CACHE_LIMIT])
