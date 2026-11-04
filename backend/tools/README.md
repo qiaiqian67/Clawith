@@ -27,6 +27,9 @@ uv run python tools\setup_langgraph_checkpoints_win.py
 uv run python seed.py
 
 # 2. The cache.
+# The client speaks RESP3 by default and this server speaks RESP2, so the
+# address names the version. Without it every connection fails at connect.
+$env:REDIS_URL='redis://127.0.0.1:6380/0?protocol=2'
 python tools\local_redis.py --port 6380
 
 # 3. The mail catcher.

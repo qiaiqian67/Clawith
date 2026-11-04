@@ -1,9 +1,8 @@
 """A local Redis for a local run.
 
-The platform needs a Redis with the RESP3 handshake, because the realtime
-router uses the `HELLO` command that the redis client sends on connect. The
-Redis build for Windows is old enough to answer neither `HELLO` nor `CLIENT
-TRACKING`, so a local run needs a server that speaks the current protocol.
+The platform needs a Redis for the command inbox, the sign-in codes, and the
+presence. The Redis build for Windows is old enough to answer neither `HELLO`
+nor `CLIENT TRACKING`, so a local run needs a server of its own.
 
 The server is a small RESP2 implementation with the commands the platform
 uses:
@@ -14,6 +13,11 @@ uses:
 - lists: `LPUSH`, `RPUSH`, `LRANGE`, `LREM`
 - pub/sub: `SUBSCRIBE`, `UNSUBSCRIBE`, `PUBLISH`
 - connection: `PING`, `QUIT`, `INFO`, `COMMAND`, `SELECT`
+
+This server speaks RESP2 only, and the client defaults to RESP3, so the
+address of a local run must name the version:
+
+    REDIS_URL=redis://127.0.0.1:6380/0?protocol=2
 
 Run it with:
 
@@ -543,9 +547,12 @@ class LocalRedis:
             writer.write(f"*3\r\n$11\r\nunsubscribe\r\n${len(channel)}\r\n{channel}\r\n:0\r\n".encode("latin-1"))
 
     async def _cmd_hello(self, args: list[bytes], writer: asyncio.StreamWriter, _subscribed) -> None:
-        # The client asks for RESP3. The local server answers RESP2, which the
-        # client accepts when it asked without a version.
-        writer.write(b"-ERR unknown command 'HELLO'\r\n")
+        # The client asks for a protocol version this server does not speak.
+        # The error says what the address of a local run must name, so the
+        # next attempt is a fix rather than a search.
+        writer.write(
+            b"-ERR the local redis speaks RESP2: name protocol=2 in REDIS_URL\r\n"
+        )
 
 
 async def main(port: int) -> None:
